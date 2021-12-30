@@ -9,6 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # 国际化
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.2
   scroll_to_index: ^2.1.1
 
@@ -31,6 +35,9 @@ dependencies:
   # 网络请求
   dio: ^4.0.4
 
+  # 弹窗
+  flutter_easyloading: ^3.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -44,3 +51,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+# 国际化
+flutter_intl:
+  enabled: true
