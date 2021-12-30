@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/riverpod/jokes_state.dart';
+import 'package:flutter_best_practice/pages/jokes/jokes_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../jokes_provider.dart';
