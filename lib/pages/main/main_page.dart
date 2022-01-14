@@ -16,43 +16,36 @@ class MainPage extends HookConsumerWidget {
       body: Center(
         child: Column(
           children: <Widget>[
-            GestureDetector(
-              child: Container(
-                  color: Colors.blueAccent,
-                  width: 200,
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.only(top: 10),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    "RiverPod",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  )),
-              onTap: () {
-                ref.read(gRouteProvider).push(const JokeRoutes());
-              },
-            ),
-            GestureDetector(
-              child: Container(
-                  width: 200,
-                  color: Colors.blueAccent,
-                  padding: const EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(top: 10),
-                  child: const Text(
-                    "Scroll",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  )),
-              onTap: () {
-                ref.read(gRouteProvider).push(ScrollRoute());
-              },
-            ),
+            _cell("Jokes", onTap: () {
+              ref.read(gRouteProvider).push(const JokeRoutes());
+            }),
+            _cell("Scroll", onTap: () {
+              ref.read(gRouteProvider).push(ScrollRoute());
+            }),
+            _cell("Rss", onTap: () {
+              ref.read(gRouteProvider).push(const RssRoute());
+            })
           ],
         ),
       ),
+    );
+  }
+
+  _cell(String title, {VoidCallback? onTap}) {
+    return GestureDetector(
+      child: Container(
+          width: 200,
+          color: Colors.blueAccent,
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(top: 10),
+          child: Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          )),
+      onTap: onTap,
     );
   }
 }
