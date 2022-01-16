@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RssReadPage extends StatelessWidget {
@@ -34,25 +35,10 @@ class RssReadPage extends StatelessWidget {
 
   addRss(BuildContext context) {
     Alert(
-        context: context,
-        title: "添加订阅",
-        content: Column(
-          children: const <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                labelText: '将订阅源粘贴到这里',
-              ),
-            ),
-          ],
-        ),
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              "获取",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
+      context: context,
+      title: "添加订阅",
+      content: const AddRssView(),
+      buttons: [],
+    ).show();
   }
 }
