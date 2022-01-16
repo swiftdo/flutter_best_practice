@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/jokes/jokes_page.dart';
 import 'package:flutter_best_practice/pages/main/main_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_config_page.dart';
+import 'package:flutter_best_practice/pages/rss/rss_find_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_index_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_page.dart';
@@ -23,6 +24,7 @@ class AppRouteObserver extends AutoRouterObserver {
     AutoRoute(path: "demo-rss", page: RssPage, children: [
       AutoRoute(path: "index", page: RssIndexPage),
       AutoRoute(path: "read", page: RssReadPage),
+      AutoRoute(path: "find", page: RssFindPage),
       AutoRoute(path: "config", page: RssConfigPage)
     ])
   ],
