@@ -16,25 +16,31 @@ class RssPage extends HookConsumerWidget {
       routes: const [
         RssIndexRoute(),
         RssReadRoute(),
+        RssFindRoute(),
         RssConfigRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavyBar(
+          showElevation: false,
           selectedIndex: tabsRouter.activeIndex,
           onItemSelected: tabsRouter.setActiveIndex,
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              title: const Text('首页'),
-              icon: const Icon(Icons.home),
-            ),
+                title: Text('首页'),
+                icon: Icon(Icons.home),
+                textAlign: TextAlign.center),
             BottomNavyBarItem(
-              title: const Text('阅读列表'),
-              icon: const Icon(Icons.apps),
-            ),
+                title: Text('订阅'),
+                icon: Icon(Icons.apps),
+                textAlign: TextAlign.center),
             BottomNavyBarItem(
-              title: const Text('设置'),
-              icon: const Icon(Icons.settings),
-            ),
+                title: Text('发现'),
+                icon: Icon(Icons.find_in_page_outlined),
+                textAlign: TextAlign.center),
+            BottomNavyBarItem(
+                title: Text('我的'),
+                icon: Icon(Icons.person),
+                textAlign: TextAlign.center),
           ],
         );
       },
