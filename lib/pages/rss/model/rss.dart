@@ -3,6 +3,7 @@ import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 
 class Rss {
+  final int? id;
   final String url;
   final String name;
   final String desc;
@@ -14,6 +15,7 @@ class Rss {
   final bool grabOrigin; // 是否抓取原文
 
   Rss({
+    this.id,
     required this.url,
     required this.name,
     required this.desc,

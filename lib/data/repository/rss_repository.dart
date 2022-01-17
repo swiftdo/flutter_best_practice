@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 
@@ -15,7 +16,7 @@ class RssRes {
 }
 
 abstract class IRssRepository {
-  Future<RssRes?> getRss(String url);
+  Future<Rss?> getRss(String url);
 }
 
 class RssRepository implements IRssRepository {
@@ -25,7 +26,7 @@ class RssRepository implements IRssRepository {
   ));
 
   @override
-  Future<RssRes?> getRss(String url, {String? type}) async {
+  Future<Rss?> getRss(String url, {String? type}) async {
     Response response = await _dioClient.get(url);
     RssRes? feed;
     if (type == null || type.isEmpty) {
@@ -39,6 +40,6 @@ class RssRepository implements IRssRepository {
     } else if (type == 'rss') {
       feed = RssRes.rss(RssFeed.parse(response.data));
     }
-    return feed;
+    return Rss.from(feed);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';
 
@@ -12,7 +11,7 @@ class AddRssView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(addRssProvider);
-    final rss = Rss.from(state.res);
+    final rss = state.rss;
 
     if (rss != null) {
       return Column(
@@ -115,20 +114,19 @@ class AddRssView extends HookConsumerWidget {
     } else {
       return Column(
         children: <Widget>[
-          const SizedBox(
+          SizedBox(
             width: double.infinity,
-            height: 0,
-          ),
-          TextField(
-            autocorrect: false,
-            decoration: const InputDecoration(
-              labelText: '将订阅源粘贴到这里',
-              contentPadding: EdgeInsets.only(bottom: 10),
+            child: TextField(
+              autocorrect: false,
+              decoration: const InputDecoration(
+                labelText: '将订阅源粘贴到这里',
+                contentPadding: EdgeInsets.only(bottom: 10),
+              ),
+              keyboardType: TextInputType.url,
+              onChanged: (val) {
+                ref.read(addRssProvider.notifier).url = val;
+              },
             ),
-            keyboardType: TextInputType.url,
-            onChanged: (val) {
-              ref.read(addRssProvider.notifier).url = val;
-            },
           ),
           const SizedBox(height: 30),
           ProgressButton(
