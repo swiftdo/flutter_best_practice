@@ -51,8 +51,10 @@ class AppRouter extends _i9.RootStackRouter {
           routeData: routeData, child: const _i5.RssIndexPage());
     },
     RssReadRoute.name: (routeData) {
+      final args = routeData.argsAs<RssReadRouteArgs>(
+          orElse: () => const RssReadRouteArgs());
       return _i9.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i6.RssReadPage());
+          routeData: routeData, child: _i6.RssReadPage(key: args.key));
     },
     RssFindRoute.name: (routeData) {
       return _i9.MaterialPageX<dynamic>(
@@ -138,10 +140,23 @@ class RssIndexRoute extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.RssReadPage]
-class RssReadRoute extends _i9.PageRouteInfo<void> {
-  const RssReadRoute() : super(RssReadRoute.name, path: 'read');
+class RssReadRoute extends _i9.PageRouteInfo<RssReadRouteArgs> {
+  RssReadRoute({_i10.Key? key})
+      : super(RssReadRoute.name,
+            path: 'read', args: RssReadRouteArgs(key: key));
 
   static const String name = 'RssReadRoute';
+}
+
+class RssReadRouteArgs {
+  const RssReadRouteArgs({this.key});
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return 'RssReadRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

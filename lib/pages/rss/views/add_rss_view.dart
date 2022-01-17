@@ -93,6 +93,7 @@ class AddRssView extends HookConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
+              ref.read(addRssProvider.notifier).add();
               // 添加到数据库中
               Navigator.of(context).pop();
             },

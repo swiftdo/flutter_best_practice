@@ -45,6 +45,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   progress_state_button: ^1.0.4
   cached_network_image: ^3.2.0
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:
