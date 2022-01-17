@@ -23,10 +23,18 @@ class RssPage extends HookConsumerWidget {
           selectedIndex: tabsRouter.activeIndex,
           onItemSelected: tabsRouter.setActiveIndex,
           items: <BottomNavyBarItem>[
-            BottomNavyBarItem(title: Text('Item One'), icon: Icon(Icons.home)),
-            BottomNavyBarItem(title: Text('Item Two'), icon: Icon(Icons.apps)),
             BottomNavyBarItem(
-                title: Text('Item Three'), icon: Icon(Icons.chat_bubble)),
+              title: const Text('首页'),
+              icon: const Icon(Icons.home),
+            ),
+            BottomNavyBarItem(
+              title: const Text('阅读列表'),
+              icon: const Icon(Icons.apps),
+            ),
+            BottomNavyBarItem(
+              title: const Text('设置'),
+              icon: const Icon(Icons.settings),
+            ),
           ],
         );
       },
