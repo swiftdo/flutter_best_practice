@@ -26,18 +26,22 @@ class RssPage extends HookConsumerWidget {
           onItemSelected: tabsRouter.setActiveIndex,
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
+                activeColor: Colors.black,
                 title: Text('首页'),
                 icon: Icon(Icons.home),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
+                activeColor: Colors.black,
                 title: Text('订阅'),
                 icon: Icon(Icons.apps),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
+                activeColor: Colors.black,
                 title: Text('发现'),
                 icon: Icon(Icons.find_in_page_outlined),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
+                activeColor: Colors.black,
                 title: Text('我的'),
                 icon: Icon(Icons.person),
                 textAlign: TextAlign.center),

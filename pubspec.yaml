@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -43,6 +43,8 @@ dependencies:
   bottom_navy_bar: ^6.0.0
 
   rflutter_alert: ^2.0.4
+  progress_state_button: ^1.0.4
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
