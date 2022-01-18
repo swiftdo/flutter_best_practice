@@ -20,7 +20,6 @@ class RssPage extends HookConsumerWidget {
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavyBar(
-          showElevation: false,
           selectedIndex: tabsRouter.activeIndex,
           onItemSelected: tabsRouter.setActiveIndex,
           items: <BottomNavyBarItem>[

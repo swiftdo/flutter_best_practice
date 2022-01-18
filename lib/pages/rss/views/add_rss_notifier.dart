@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
@@ -42,8 +41,8 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   }
 
   fetch() async {
-    final String? url = state.url;
-    if (url == null || url.trim().isEmpty) {
+    final String? url = state.url?.trim();
+    if (url == null || url.isEmpty) {
       EasyLoading.showError("请填写 url");
       return;
     }
@@ -62,10 +61,10 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   }
 
   /// 添加rss
-  add() {
+  add() async {
     if (state.rss?.id == null) {
       // 添加到数据库中
-      rssDao.saveRss(state.rss!);
+      await rssDao.saveRss(state.rss!);
     }
   }
 }

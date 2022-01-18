@@ -40,6 +40,6 @@ class RssRepository implements IRssRepository {
     } else if (type == 'rss') {
       feed = RssRes.rss(RssFeed.parse(response.data));
     }
-    return Rss.from(feed);
+    return Rss.from(feed, url);
   }
 }

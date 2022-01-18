@@ -33,14 +33,12 @@ class Rss {
     return "${uri.scheme}://${uri.host}/favicon.ico";
   }
 
-  static Rss? from(RssRes? res) {
+  static Rss? from(RssRes? res, String url) {
     if (res == null) {
       return null;
     }
     if (res.isRss) {
       final feed = res.feed as RssFeed;
-      final String url = feed.link ?? '';
-
       return Rss(
         url: url,
         name: feed.title ?? "",
@@ -51,7 +49,6 @@ class Rss {
       );
     } else if (res.isAtom) {
       final feed = res.feed as AtomFeed;
-      final String url = feed.links?.first.href ?? '';
       return Rss(
         url: url,
         name: feed.title ?? "",

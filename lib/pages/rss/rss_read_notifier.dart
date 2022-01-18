@@ -45,20 +45,20 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   // 下拉刷新
   onRefresh(RefreshController refreshController) async {
     _page = 1;
-    state.copy(viewState: ViewState.busy);
+    state = state.copy(viewState: ViewState.busy);
     final res = await rssDao.getRssList(
       page: _page,
       pageSize: _pageSize,
     );
     refreshController.refreshCompleted();
     if (res.isEmpty) {
-      state.copy(
+      state = state.copy(
         viewState: ViewState.empty,
         items: [],
         hasMore: false,
       );
     } else {
-      state.copy(
+      state = state.copy(
         viewState: ViewState.idea,
         items: res,
         hasMore: res.length >= _pageSize,

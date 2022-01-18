@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -18,6 +19,7 @@ class RssReadPage extends HookConsumerWidget {
     final state = ref.watch(rssReadProvider);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text(
@@ -39,6 +41,55 @@ class RssReadPage extends HookConsumerWidget {
                 color: Colors.black,
               ))
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(40),
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            height: 36,
+            child: Row(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                    boxShadow: const [
+                      BoxShadow(
+                        blurRadius: 2,
+                        color: Colors.black12,
+                        offset: Offset.zero,
+                      )
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "全部类型",
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        width: 1,
+                        height: 10,
+                        color: Colors.black,
+                      ),
+                      const Icon(
+                        Icons.dashboard_outlined,
+                        color: Colors.black,
+                        size: 16,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
       body: SmartRefresher(
         enablePullDown: true,
@@ -81,7 +132,10 @@ class RssReadPage extends HookConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const Text("暂无订阅"),
+          Container(
+            margin: const EdgeInsets.only(top: 100),
+            child: const Text("暂无订阅数据"),
+          ),
         ],
       ),
     );
@@ -92,26 +146,57 @@ class RssReadPage extends HookConsumerWidget {
       return buildEmpty();
     }
 
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, //横轴三个子widget
-          childAspectRatio: 1.0 //宽高比为1时，子widget
-          ),
+    return MasonryGridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 16,
+      crossAxisSpacing: 16,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemBuilder: (context, index) {
         final item = state.items[index];
         return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 2,
+                offset: Offset.zero,
+              )
+            ],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.all(10),
+          alignment: Alignment.center,
           child: Column(
             children: [
               CachedNetworkImage(
                 width: 40,
                 height: 40,
                 imageUrl: item.logo,
+                fit: BoxFit.cover,
               ),
-              Text(item.name),
-              Text(
-                item.desc,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+              Container(
+                margin: const EdgeInsets.only(top: 5),
+                child: Text(
+                  item.name,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 5),
+                child: Text(
+                  item.desc,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                  ),
+                ),
               ),
             ],
           ),
@@ -119,6 +204,57 @@ class RssReadPage extends HookConsumerWidget {
       },
       itemCount: state.items.length,
     );
+
+    // return GridView.builder(
+    //   padding: const EdgeInsets.symmetric(horizontal: 16),
+    //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    //     mainAxisSpacing: 10,
+    //     crossAxisSpacing: 10,
+    //     crossAxisCount: 3,
+    //     childAspectRatio: 1.0,
+    //   ),
+    //   itemBuilder: (context, index) {
+    //     final item = state.items[index];
+    //     return Container(
+    //       decoration: const BoxDecoration(color: Colors.green),
+    //       padding: const EdgeInsets.all(5),
+    //       alignment: Alignment.center,
+    //       child: Column(
+    //         children: [
+    //           CachedNetworkImage(
+    //             width: 40,
+    //             height: 40,
+    //             imageUrl: item.logo,
+    //             fit: BoxFit.cover,
+    //           ),
+    //           Container(
+    //             margin: const EdgeInsets.only(top: 5),
+    //             child: Text(
+    //               item.name,
+    //               style: const TextStyle(
+    //                 fontSize: 14,
+    //                 fontWeight: FontWeight.bold,
+    //               ),
+    //             ),
+    //           ),
+    //           Container(
+    //             margin: const EdgeInsets.only(top: 5),
+    //             child: Text(
+    //               item.desc,
+    //               maxLines: 2,
+    //               overflow: TextOverflow.ellipsis,
+    //               style: const TextStyle(
+    //                 color: Colors.grey,
+    //                 fontSize: 12,
+    //               ),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    //   itemCount: state.items.length,
+    // );
   }
 
   addRss(BuildContext context) {

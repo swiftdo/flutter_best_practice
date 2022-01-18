@@ -55,24 +55,25 @@ class AddRssView extends HookConsumerWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("分类"),
-                Row(
-                  children: const [
-                    Text(
-                      "无分类",
-                      style: TextStyle(color: Colors.black54),
-                    ),
-                    Icon(Icons.arrow_right)
-                  ],
-                ),
-              ],
+          if (rss.id == null)
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("分类"),
+                  Row(
+                    children: const [
+                      Text(
+                        "无分类",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      Icon(Icons.arrow_right)
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
           Container(
             margin: const EdgeInsets.only(top: 10),
             child: Row(
@@ -100,11 +101,12 @@ class AddRssView extends HookConsumerWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
               decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(30)),
+                  color: rss.id == null ? Colors.black : Colors.grey,
+                  borderRadius: BorderRadius.circular(30)),
               margin: const EdgeInsets.only(top: 20),
-              child: const Text(
-                '订阅',
-                style: TextStyle(
+              child: Text(
+                rss.id == null ? '订阅' : '已订阅',
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -155,8 +157,10 @@ class AddRssView extends HookConsumerWidget {
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
               )
             },
-            stateColors: const {
-              ButtonState.idle: Colors.black,
+            stateColors: {
+              ButtonState.idle: state.url?.trim().isNotEmpty == true
+                  ? Colors.black
+                  : Colors.grey,
               ButtonState.loading: Colors.black,
               ButtonState.fail: Colors.black,
               ButtonState.success: Colors.black,

@@ -20,6 +20,7 @@ class MyApp extends HookConsumerWidget {
     final appRouter = ref.watch(gRouteProvider);
     return MaterialApp.router(
       theme: ThemeData.light(),
+      debugShowCheckedModeBanner: false,
       routeInformationParser: appRouter.defaultRouteParser(),
       routeInformationProvider: appRouter.routeInfoProvider(),
       routerDelegate: AutoRouterDelegate(

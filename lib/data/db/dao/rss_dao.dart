@@ -6,11 +6,11 @@ import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 part 'rss_dao.g.dart';
 
 extension RssTableDataExt on RssTableData {
-  Rss toRss() {
+  Rss toRss({String? feedUrl}) {
     final res = this;
     return Rss(
       id: res.id,
-      url: res.url,
+      url: feedUrl ?? res.url,
       name: res.name,
       desc: res.desc,
       categoryId: res.categoryId,
@@ -31,7 +31,7 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
     final res = await (select(rssTable)
           ..orderBy(
               [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)])
-          ..limit((page - 1) * pageSize, offset: pageSize))
+          ..limit(pageSize, offset: (page - 1) * pageSize))
         .get();
     return res.map((e) => e.toRss()).toList();
   }
@@ -39,25 +39,22 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
   Future<Rss?> getRss(String url) async {
     final res = await (select(rssTable)..where((tbl) => tbl.url.equals(url)))
         .getSingleOrNull();
-
-    if (res != null) {
-      return res.toRss();
-    }
-    return null;
+    return res?.toRss();
   }
 
   Future saveRss(Rss rss) {
     return into(rssTable).insert(
       RssTableCompanion(
-          url: Value(rss.url),
-          name: Value(rss.name),
-          desc: Value(rss.desc),
-          logo: Value(rss.logo),
-          categoryId: Value(rss.categoryId),
-          type: Value(rss.type),
-          readOrigin: Value(rss.readOrigin),
-          openPush: Value(rss.openPush),
-          grabOrigin: Value(rss.grabOrigin)),
+        url: Value(rss.url),
+        name: Value(rss.name),
+        desc: Value(rss.desc),
+        logo: Value(rss.logo),
+        categoryId: Value(rss.categoryId),
+        type: Value(rss.type),
+        readOrigin: Value(rss.readOrigin),
+        openPush: Value(rss.openPush),
+        grabOrigin: Value(rss.grabOrigin),
+      ),
     );
   }
 }
