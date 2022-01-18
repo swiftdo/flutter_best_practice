@@ -42,6 +42,10 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   final RssDao rssDao;
   RssReadNotifier({required this.rssDao}) : super(RssReadState.initial());
 
+  addRss(Rss rss) {
+    state = state.copy(items: [rss, ...state.items]);
+  }
+
   // 下拉刷新
   onRefresh(RefreshController refreshController) async {
     _page = 1;

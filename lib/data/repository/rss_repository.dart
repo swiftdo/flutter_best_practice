@@ -32,16 +32,16 @@ class RssRepository implements IRssRepository {
     } else if (type == 'rss') {
       feed = RssFeed.parse(response.data);
     }
-    return rssFrom(feed, feedUrl, rssType);
+    return _rssFrom(feed, feedUrl, rssType);
   }
 
-  // 从 link 中获取域名，拼接https://coolshell.cn/favicon.ico
-  getIcoLink(String url) {
+  // 从 link 中获取域名，拼接 https://coolshell.cn/favicon.ico
+  _getIcoLink(String url) {
     Uri uri = Uri.parse(url);
     return "${uri.scheme}://${uri.host}/favicon.ico";
   }
 
-  rssFrom(dynamic feed, String url, String? type) {
+  _rssFrom(dynamic feed, String url, String? type) {
     if (feed == null) {
       return null;
     }
@@ -51,7 +51,7 @@ class RssRepository implements IRssRepository {
         url: feed.link ?? "",
         name: feed.title ?? "",
         desc: feed.description ?? "",
-        logo: feed.image?.url ?? getIcoLink(url),
+        logo: _getIcoLink(url),
         type: type ?? "",
         categoryId: 0,
         feedUrl: url,
@@ -62,7 +62,7 @@ class RssRepository implements IRssRepository {
         url: link,
         name: feed.title ?? "",
         desc: feed.subtitle ?? '',
-        logo: feed.logo ?? getIcoLink(url),
+        logo: _getIcoLink(url),
         type: type ?? "",
         categoryId: 0,
         feedUrl: url,

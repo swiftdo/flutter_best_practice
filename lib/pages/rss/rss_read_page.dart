@@ -204,57 +204,6 @@ class RssReadPage extends HookConsumerWidget {
       },
       itemCount: state.items.length,
     );
-
-    // return GridView.builder(
-    //   padding: const EdgeInsets.symmetric(horizontal: 16),
-    //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-    //     mainAxisSpacing: 10,
-    //     crossAxisSpacing: 10,
-    //     crossAxisCount: 3,
-    //     childAspectRatio: 1.0,
-    //   ),
-    //   itemBuilder: (context, index) {
-    //     final item = state.items[index];
-    //     return Container(
-    //       decoration: const BoxDecoration(color: Colors.green),
-    //       padding: const EdgeInsets.all(5),
-    //       alignment: Alignment.center,
-    //       child: Column(
-    //         children: [
-    //           CachedNetworkImage(
-    //             width: 40,
-    //             height: 40,
-    //             imageUrl: item.logo,
-    //             fit: BoxFit.cover,
-    //           ),
-    //           Container(
-    //             margin: const EdgeInsets.only(top: 5),
-    //             child: Text(
-    //               item.name,
-    //               style: const TextStyle(
-    //                 fontSize: 14,
-    //                 fontWeight: FontWeight.bold,
-    //               ),
-    //             ),
-    //           ),
-    //           Container(
-    //             margin: const EdgeInsets.only(top: 5),
-    //             child: Text(
-    //               item.desc,
-    //               maxLines: 2,
-    //               overflow: TextOverflow.ellipsis,
-    //               style: const TextStyle(
-    //                 color: Colors.grey,
-    //                 fontSize: 12,
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //   },
-    //   itemCount: state.items.length,
-    // );
   }
 
   addRss(BuildContext context) {

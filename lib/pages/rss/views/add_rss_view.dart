@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';
 
@@ -94,7 +95,11 @@ class AddRssView extends HookConsumerWidget {
           ),
           GestureDetector(
             onTap: () {
-              ref.read(addRssProvider.notifier).add();
+              if (state.rss?.id == null) {
+                // 添加到数据库中
+                ref.read(addRssProvider.notifier).addRss(rss);
+                ref.read(rssReadProvider.notifier).addRss(rss);
+              }
               // 添加到数据库中
               Navigator.of(context).pop();
             },
