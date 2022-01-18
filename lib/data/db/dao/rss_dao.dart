@@ -6,11 +6,11 @@ import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 part 'rss_dao.g.dart';
 
 extension RssTableDataExt on RssTableData {
-  Rss toRss({String? feedUrl}) {
+  Rss toRss() {
     final res = this;
     return Rss(
       id: res.id,
-      url: feedUrl ?? res.url,
+      url: res.url,
       name: res.name,
       desc: res.desc,
       categoryId: res.categoryId,
@@ -18,6 +18,7 @@ extension RssTableDataExt on RssTableData {
       readOrigin: res.readOrigin,
       openPush: res.openPush,
       logo: res.logo,
+      feedUrl: res.feedUrl,
     );
   }
 }
@@ -36,8 +37,9 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
     return res.map((e) => e.toRss()).toList();
   }
 
-  Future<Rss?> getRss(String url) async {
-    final res = await (select(rssTable)..where((tbl) => tbl.url.equals(url)))
+  Future<Rss?> getRss(String feedUrl) async {
+    final res = await (select(rssTable)
+          ..where((tbl) => tbl.feedUrl.equals(feedUrl)))
         .getSingleOrNull();
     return res?.toRss();
   }
@@ -45,6 +47,7 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
   Future saveRss(Rss rss) {
     return into(rssTable).insert(
       RssTableCompanion(
+        feedUrl: Value(rss.feedUrl),
         url: Value(rss.url),
         name: Value(rss.name),
         desc: Value(rss.desc),
