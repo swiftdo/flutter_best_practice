@@ -56,6 +56,7 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
     return null;
   }
 
+  // 保存rss
   Future<int> saveRss(Rss rss) {
     return into(rssTable).insert(
       RssTableCompanion(
@@ -71,5 +72,16 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
         grabOrigin: Value(rss.grabOrigin),
       ),
     );
+  }
+
+  // 删除 rss,
+  Future<List<int>> deleteRssList(List<Rss> items, RssItemDao itemDao) async {
+    final futures = items.map((rss) async {
+      final delRss =
+          await (delete(rssTable)..where((tbl) => tbl.id.equals(rss.id))).go();
+      final delItems = await itemDao.deleteItemsFromRss(rss.id!);
+      return delRss + delItems;
+    });
+    return Future.wait(futures);
   }
 }

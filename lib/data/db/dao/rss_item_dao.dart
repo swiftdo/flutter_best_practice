@@ -84,4 +84,9 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
 
     return res.map((e) => e.toRssItemModel()).toList();
   }
+
+  /// 删除某个rss的items
+  Future<int> deleteItemsFromRss(int fid) {
+    return (delete(rssItemTable)..where((tbl) => tbl.fid.equals(fid))).go();
+  }
 }
