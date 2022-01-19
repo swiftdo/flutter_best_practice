@@ -527,6 +527,7 @@ class RssItemTableData extends DataClass
   final int cateId;
   final String title;
   final String desc;
+  final String content;
   final String link;
   final String author;
   final String pubDate;
@@ -540,6 +541,7 @@ class RssItemTableData extends DataClass
       required this.cateId,
       required this.title,
       required this.desc,
+      required this.content,
       required this.link,
       required this.author,
       required this.pubDate,
@@ -561,6 +563,8 @@ class RssItemTableData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}title'])!,
       desc: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}desc'])!,
+      content: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}content'])!,
       link: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}link'])!,
       author: const StringType()
@@ -585,6 +589,7 @@ class RssItemTableData extends DataClass
     map['cate_id'] = Variable<int>(cateId);
     map['title'] = Variable<String>(title);
     map['desc'] = Variable<String>(desc);
+    map['content'] = Variable<String>(content);
     map['link'] = Variable<String>(link);
     map['author'] = Variable<String>(author);
     map['pub_date'] = Variable<String>(pubDate);
@@ -606,6 +611,7 @@ class RssItemTableData extends DataClass
       cateId: Value(cateId),
       title: Value(title),
       desc: Value(desc),
+      content: Value(content),
       link: Value(link),
       author: Value(author),
       pubDate: Value(pubDate),
@@ -628,6 +634,7 @@ class RssItemTableData extends DataClass
       cateId: serializer.fromJson<int>(json['cateId']),
       title: serializer.fromJson<String>(json['title']),
       desc: serializer.fromJson<String>(json['desc']),
+      content: serializer.fromJson<String>(json['content']),
       link: serializer.fromJson<String>(json['link']),
       author: serializer.fromJson<String>(json['author']),
       pubDate: serializer.fromJson<String>(json['pubDate']),
@@ -646,6 +653,7 @@ class RssItemTableData extends DataClass
       'cateId': serializer.toJson<int>(cateId),
       'title': serializer.toJson<String>(title),
       'desc': serializer.toJson<String>(desc),
+      'content': serializer.toJson<String>(content),
       'link': serializer.toJson<String>(link),
       'author': serializer.toJson<String>(author),
       'pubDate': serializer.toJson<String>(pubDate),
@@ -662,6 +670,7 @@ class RssItemTableData extends DataClass
           int? cateId,
           String? title,
           String? desc,
+          String? content,
           String? link,
           String? author,
           String? pubDate,
@@ -675,6 +684,7 @@ class RssItemTableData extends DataClass
         cateId: cateId ?? this.cateId,
         title: title ?? this.title,
         desc: desc ?? this.desc,
+        content: content ?? this.content,
         link: link ?? this.link,
         author: author ?? this.author,
         pubDate: pubDate ?? this.pubDate,
@@ -691,6 +701,7 @@ class RssItemTableData extends DataClass
           ..write('cateId: $cateId, ')
           ..write('title: $title, ')
           ..write('desc: $desc, ')
+          ..write('content: $content, ')
           ..write('link: $link, ')
           ..write('author: $author, ')
           ..write('pubDate: $pubDate, ')
@@ -703,8 +714,8 @@ class RssItemTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, fid, cateId, title, desc, link, author,
-      pubDate, category, cover, isRead, isCached);
+  int get hashCode => Object.hash(id, fid, cateId, title, desc, content, link,
+      author, pubDate, category, cover, isRead, isCached);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -714,6 +725,7 @@ class RssItemTableData extends DataClass
           other.cateId == this.cateId &&
           other.title == this.title &&
           other.desc == this.desc &&
+          other.content == this.content &&
           other.link == this.link &&
           other.author == this.author &&
           other.pubDate == this.pubDate &&
@@ -729,6 +741,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
   final Value<int> cateId;
   final Value<String> title;
   final Value<String> desc;
+  final Value<String> content;
   final Value<String> link;
   final Value<String> author;
   final Value<String> pubDate;
@@ -742,6 +755,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     this.cateId = const Value.absent(),
     this.title = const Value.absent(),
     this.desc = const Value.absent(),
+    this.content = const Value.absent(),
     this.link = const Value.absent(),
     this.author = const Value.absent(),
     this.pubDate = const Value.absent(),
@@ -756,6 +770,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     required int cateId,
     required String title,
     required String desc,
+    required String content,
     required String link,
     required String author,
     required String pubDate,
@@ -767,6 +782,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
         cateId = Value(cateId),
         title = Value(title),
         desc = Value(desc),
+        content = Value(content),
         link = Value(link),
         author = Value(author),
         pubDate = Value(pubDate);
@@ -776,6 +792,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     Expression<int>? cateId,
     Expression<String>? title,
     Expression<String>? desc,
+    Expression<String>? content,
     Expression<String>? link,
     Expression<String>? author,
     Expression<String>? pubDate,
@@ -790,6 +807,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       if (cateId != null) 'cate_id': cateId,
       if (title != null) 'title': title,
       if (desc != null) 'desc': desc,
+      if (content != null) 'content': content,
       if (link != null) 'link': link,
       if (author != null) 'author': author,
       if (pubDate != null) 'pub_date': pubDate,
@@ -806,6 +824,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       Value<int>? cateId,
       Value<String>? title,
       Value<String>? desc,
+      Value<String>? content,
       Value<String>? link,
       Value<String>? author,
       Value<String>? pubDate,
@@ -819,6 +838,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       cateId: cateId ?? this.cateId,
       title: title ?? this.title,
       desc: desc ?? this.desc,
+      content: content ?? this.content,
       link: link ?? this.link,
       author: author ?? this.author,
       pubDate: pubDate ?? this.pubDate,
@@ -846,6 +866,9 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     }
     if (desc.present) {
       map['desc'] = Variable<String>(desc.value);
+    }
+    if (content.present) {
+      map['content'] = Variable<String>(content.value);
     }
     if (link.present) {
       map['link'] = Variable<String>(link.value);
@@ -879,6 +902,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
           ..write('cateId: $cateId, ')
           ..write('title: $title, ')
           ..write('desc: $desc, ')
+          ..write('content: $content, ')
           ..write('link: $link, ')
           ..write('author: $author, ')
           ..write('pubDate: $pubDate, ')
@@ -922,6 +946,11 @@ class $RssItemTableTable extends RssItemTable
   @override
   late final GeneratedColumn<String?> desc = GeneratedColumn<String?>(
       'desc', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _contentMeta = const VerificationMeta('content');
+  @override
+  late final GeneratedColumn<String?> content = GeneratedColumn<String?>(
+      'content', aliasedName, false,
       type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _linkMeta = const VerificationMeta('link');
   @override
@@ -971,6 +1000,7 @@ class $RssItemTableTable extends RssItemTable
         cateId,
         title,
         desc,
+        content,
         link,
         author,
         pubDate,
@@ -1014,6 +1044,12 @@ class $RssItemTableTable extends RssItemTable
           _descMeta, desc.isAcceptableOrUnknown(data['desc']!, _descMeta));
     } else if (isInserting) {
       context.missing(_descMeta);
+    }
+    if (data.containsKey('content')) {
+      context.handle(_contentMeta,
+          content.isAcceptableOrUnknown(data['content']!, _contentMeta));
+    } else if (isInserting) {
+      context.missing(_contentMeta);
     }
     if (data.containsKey('link')) {
       context.handle(

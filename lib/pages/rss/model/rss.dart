@@ -1,5 +1,9 @@
+import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'package:webfeed/domain/atom_item.dart';
+import 'package:webfeed/domain/rss_item.dart';
+
 class Rss {
-  final int? id;
+  int? id;
   final String url;
   final String name;
   final String desc;
@@ -10,6 +14,12 @@ class Rss {
   final bool openPush; // 是否通知提醒
   final bool grabOrigin; // 是否抓取原文
   final String feedUrl;
+  final dynamic items; // 临时存放
+
+  bool get isAtom => type == "atom";
+  bool get isRss => type == "rss";
+
+  List<RssItemModel> rssItems;
 
   Rss({
     this.id,
@@ -23,5 +33,23 @@ class Rss {
     this.openPush = false,
     this.grabOrigin = false,
     required this.feedUrl,
+    this.rssItems = const [],
+    this.items,
   });
+
+  refreshRssItems() async {
+    if (items != null) {
+      if (isAtom) {
+        List<AtomItem> feeds = items as List<AtomItem>;
+        rssItems = feeds
+            .map((e) => RssItemModel.fromAtomItem(e, id!, categoryId))
+            .toList();
+      } else if (isRss) {
+        List<RssItem> feeds = items as List<RssItem>;
+        rssItems = feeds
+            .map((e) => RssItemModel.fromRssItem(e, id!, categoryId))
+            .toList();
+      }
+    }
+  }
 }

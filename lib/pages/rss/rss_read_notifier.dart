@@ -1,4 +1,5 @@
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
+import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -40,7 +41,9 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   final int _pageSize = 12;
 
   final RssDao rssDao;
-  RssReadNotifier({required this.rssDao}) : super(RssReadState.initial());
+  final RssItemDao rssItemDao;
+  RssReadNotifier({required this.rssDao, required this.rssItemDao})
+      : super(RssReadState.initial());
 
   addRss(Rss rss) {
     state = state.copy(items: [rss, ...state.items]);
@@ -53,6 +56,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
     final res = await rssDao.getRssList(
       page: _page,
       pageSize: _pageSize,
+      rssItemDao: rssItemDao,
     );
     refreshController.refreshCompleted();
     if (res.isEmpty) {
@@ -77,6 +81,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
     final res = await rssDao.getRssList(
       page: _page,
       pageSize: _pageSize,
+      rssItemDao: rssItemDao,
     );
     refreshController.loadComplete();
     state.copy(
@@ -90,5 +95,6 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
 final rssReadProvider =
     StateNotifierProvider.autoDispose<RssReadNotifier, RssReadState>((ref) {
   final rssDao = ref.watch(rssDaoProvider);
-  return RssReadNotifier(rssDao: rssDao);
+  final rssItemDao = ref.watch(rssItemDaoProvider);
+  return RssReadNotifier(rssDao: rssDao, rssItemDao: rssItemDao);
 });

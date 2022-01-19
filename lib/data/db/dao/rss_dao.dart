@@ -1,24 +1,26 @@
 import 'package:drift/drift.dart';
+import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/db/rss_db.dart';
 import 'package:flutter_best_practice/data/db/table/rss_table.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 
 part 'rss_dao.g.dart';
 
 extension RssTableDataExt on RssTableData {
-  Rss toRss() {
-    final res = this;
+  Rss toRss({List<RssItemModel>? items}) {
     return Rss(
-      id: res.id,
-      url: res.url,
-      name: res.name,
-      desc: res.desc,
-      categoryId: res.categoryId,
-      type: res.type,
-      readOrigin: res.readOrigin,
-      openPush: res.openPush,
-      logo: res.logo,
-      feedUrl: res.feedUrl,
+      id: id,
+      url: url,
+      name: name,
+      desc: desc,
+      categoryId: categoryId,
+      type: type,
+      readOrigin: readOrigin,
+      openPush: openPush,
+      logo: logo,
+      feedUrl: feedUrl,
+      rssItems: items ?? [],
     );
   }
 }
@@ -28,23 +30,33 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
   RssDao(RssDatabase db) : super(db);
 
   Future<List<Rss>> getRssList(
-      {required int page, required int pageSize}) async {
+      {required int page,
+      required int pageSize,
+      required RssItemDao rssItemDao}) async {
     final res = await (select(rssTable)
           ..orderBy(
               [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)])
           ..limit(pageSize, offset: (page - 1) * pageSize))
         .get();
-    return res.map((e) => e.toRss()).toList();
+    final futures = res.map((e) async {
+      final items = await rssItemDao.getItems(e.id);
+      return e.toRss(items: items);
+    }).toList();
+    return await Future.wait(futures);
   }
 
-  Future<Rss?> getRss(String feedUrl) async {
+  Future<Rss?> getRss(String feedUrl, RssItemDao itemDao) async {
     final res = await (select(rssTable)
           ..where((tbl) => tbl.feedUrl.equals(feedUrl)))
         .getSingleOrNull();
-    return res?.toRss();
+    if (res != null) {
+      final items = await itemDao.getItems(res.id);
+      return res.toRss(items: items);
+    }
+    return null;
   }
 
-  Future saveRss(Rss rss) {
+  Future<int> saveRss(Rss rss) {
     return into(rssTable).insert(
       RssTableCompanion(
         feedUrl: Value(rss.feedUrl),

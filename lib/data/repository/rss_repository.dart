@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:webfeed/domain/atom_feed.dart';
+import 'package:webfeed/domain/atom_item.dart';
 import 'package:webfeed/domain/rss_feed.dart';
+import 'package:webfeed/domain/rss_item.dart';
 
 abstract class IRssRepository {
   Future<Rss?> getRss(String feedUrl, {String? type});

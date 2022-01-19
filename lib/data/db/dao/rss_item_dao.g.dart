@@ -7,6 +7,5 @@ part of 'rss_item_dao.dart';
 // **************************************************************************
 
 mixin _$RssItemDaoMixin on DatabaseAccessor<RssDatabase> {
-  $RssCategoryTableTable get rssCategoryTable =>
-      attachedDatabase.rssCategoryTable;
+  $RssItemTableTable get rssItemTable => attachedDatabase.rssItemTable;
 }
