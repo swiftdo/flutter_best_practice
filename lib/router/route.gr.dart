@@ -17,13 +17,13 @@ import '../pages/jokes/jokes_page.dart' as _i2;
 import '../pages/main/main_page.dart' as _i1;
 import '../pages/rss/model/rss.dart' as _i13;
 import '../pages/rss/model/rss_item_model.dart' as _i14;
-import '../pages/rss/rss_article_page.dart' as _i10;
-import '../pages/rss/rss_articles_page.dart' as _i9;
-import '../pages/rss/rss_config_page.dart' as _i8;
-import '../pages/rss/rss_find_page.dart' as _i7;
-import '../pages/rss/rss_index_page.dart' as _i5;
+import '../pages/rss/rss_article_page.dart' as _i6;
+import '../pages/rss/rss_articles_page.dart' as _i5;
+import '../pages/rss/rss_config_page.dart' as _i10;
+import '../pages/rss/rss_find_page.dart' as _i9;
+import '../pages/rss/rss_index_page.dart' as _i7;
 import '../pages/rss/rss_page.dart' as _i4;
-import '../pages/rss/rss_read_page.dart' as _i6;
+import '../pages/rss/rss_read_page.dart' as _i8;
 import '../pages/scroll/scroll_page.dart' as _i3;
 
 class AppRouter extends _i11.RootStackRouter {
@@ -50,35 +50,35 @@ class AppRouter extends _i11.RootStackRouter {
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.RssPage());
     },
-    RssIndexRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.RssIndexPage());
-    },
-    RssReadRoute.name: (routeData) {
-      final args = routeData.argsAs<RssReadRouteArgs>(
-          orElse: () => const RssReadRouteArgs());
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i6.RssReadPage(key: args.key));
-    },
-    RssFindRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.RssFindPage());
-    },
-    RssConfigRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.RssConfigPage());
-    },
     RssArticlesRoute.name: (routeData) {
       final args = routeData.argsAs<RssArticlesRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i9.RssArticlesPage(key: args.key, rss: args.rss));
+          child: _i5.RssArticlesPage(key: args.key, rss: args.rss));
     },
     RssArticleRoute.name: (routeData) {
       final args = routeData.argsAs<RssArticleRouteArgs>();
       return _i11.MaterialPageX<dynamic>(
           routeData: routeData,
-          child: _i10.RssArticlePage(key: args.key, rssItem: args.rssItem));
+          child: _i6.RssArticlePage(key: args.key, rssItem: args.rssItem));
+    },
+    RssIndexRoute.name: (routeData) {
+      return _i11.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i7.RssIndexPage());
+    },
+    RssReadRoute.name: (routeData) {
+      final args = routeData.argsAs<RssReadRouteArgs>(
+          orElse: () => const RssReadRouteArgs());
+      return _i11.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i8.RssReadPage(key: args.key));
+    },
+    RssFindRoute.name: (routeData) {
+      return _i11.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i9.RssFindPage());
+    },
+    RssConfigRoute.name: (routeData) {
+      return _i11.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i10.RssConfigPage());
     }
   };
 
@@ -95,12 +95,10 @@ class AppRouter extends _i11.RootStackRouter {
           _i11.RouteConfig(RssFindRoute.name,
               path: 'find', parent: RssRoute.name),
           _i11.RouteConfig(RssConfigRoute.name,
-              path: 'config', parent: RssRoute.name),
-          _i11.RouteConfig(RssArticlesRoute.name,
-              path: 'articles', parent: RssRoute.name),
-          _i11.RouteConfig(RssArticleRoute.name,
-              path: 'article', parent: RssRoute.name)
-        ])
+              path: 'config', parent: RssRoute.name)
+        ]),
+        _i11.RouteConfig(RssArticlesRoute.name, path: 'articles'),
+        _i11.RouteConfig(RssArticleRoute.name, path: 'article')
       ];
 }
 
@@ -151,52 +149,7 @@ class RssRoute extends _i11.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.RssIndexPage]
-class RssIndexRoute extends _i11.PageRouteInfo<void> {
-  const RssIndexRoute() : super(RssIndexRoute.name, path: 'index');
-
-  static const String name = 'RssIndexRoute';
-}
-
-/// generated route for
-/// [_i6.RssReadPage]
-class RssReadRoute extends _i11.PageRouteInfo<RssReadRouteArgs> {
-  RssReadRoute({_i12.Key? key})
-      : super(RssReadRoute.name,
-            path: 'read', args: RssReadRouteArgs(key: key));
-
-  static const String name = 'RssReadRoute';
-}
-
-class RssReadRouteArgs {
-  const RssReadRouteArgs({this.key});
-
-  final _i12.Key? key;
-
-  @override
-  String toString() {
-    return 'RssReadRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [_i7.RssFindPage]
-class RssFindRoute extends _i11.PageRouteInfo<void> {
-  const RssFindRoute() : super(RssFindRoute.name, path: 'find');
-
-  static const String name = 'RssFindRoute';
-}
-
-/// generated route for
-/// [_i8.RssConfigPage]
-class RssConfigRoute extends _i11.PageRouteInfo<void> {
-  const RssConfigRoute() : super(RssConfigRoute.name, path: 'config');
-
-  static const String name = 'RssConfigRoute';
-}
-
-/// generated route for
-/// [_i9.RssArticlesPage]
+/// [_i5.RssArticlesPage]
 class RssArticlesRoute extends _i11.PageRouteInfo<RssArticlesRouteArgs> {
   RssArticlesRoute({_i12.Key? key, required _i13.Rss rss})
       : super(RssArticlesRoute.name,
@@ -219,7 +172,7 @@ class RssArticlesRouteArgs {
 }
 
 /// generated route for
-/// [_i10.RssArticlePage]
+/// [_i6.RssArticlePage]
 class RssArticleRoute extends _i11.PageRouteInfo<RssArticleRouteArgs> {
   RssArticleRoute({_i12.Key? key, required _i14.RssItemModel rssItem})
       : super(RssArticleRoute.name,
@@ -240,4 +193,49 @@ class RssArticleRouteArgs {
   String toString() {
     return 'RssArticleRouteArgs{key: $key, rssItem: $rssItem}';
   }
+}
+
+/// generated route for
+/// [_i7.RssIndexPage]
+class RssIndexRoute extends _i11.PageRouteInfo<void> {
+  const RssIndexRoute() : super(RssIndexRoute.name, path: 'index');
+
+  static const String name = 'RssIndexRoute';
+}
+
+/// generated route for
+/// [_i8.RssReadPage]
+class RssReadRoute extends _i11.PageRouteInfo<RssReadRouteArgs> {
+  RssReadRoute({_i12.Key? key})
+      : super(RssReadRoute.name,
+            path: 'read', args: RssReadRouteArgs(key: key));
+
+  static const String name = 'RssReadRoute';
+}
+
+class RssReadRouteArgs {
+  const RssReadRouteArgs({this.key});
+
+  final _i12.Key? key;
+
+  @override
+  String toString() {
+    return 'RssReadRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [_i9.RssFindPage]
+class RssFindRoute extends _i11.PageRouteInfo<void> {
+  const RssFindRoute() : super(RssFindRoute.name, path: 'find');
+
+  static const String name = 'RssFindRoute';
+}
+
+/// generated route for
+/// [_i10.RssConfigPage]
+class RssConfigRoute extends _i11.PageRouteInfo<void> {
+  const RssConfigRoute() : super(RssConfigRoute.name, path: 'config');
+
+  static const String name = 'RssConfigRoute';
 }

@@ -57,21 +57,45 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
   }
 
   // 保存rss
-  Future<int> saveRss(Rss rss) {
-    return into(rssTable).insert(
-      RssTableCompanion(
-        feedUrl: Value(rss.feedUrl),
-        url: Value(rss.url),
-        name: Value(rss.name),
-        desc: Value(rss.desc),
-        logo: Value(rss.logo),
-        categoryId: Value(rss.categoryId),
-        type: Value(rss.type),
-        readOrigin: Value(rss.readOrigin),
-        openPush: Value(rss.openPush),
-        grabOrigin: Value(rss.grabOrigin),
-      ),
-    );
+  Future<int> saveRss(Rss rss, {required RssItemDao rssItemDao}) async {
+    int? fid = rss.id;
+    if (fid == null) {
+      fid = await into(rssTable).insert(
+        RssTableCompanion(
+          feedUrl: Value(rss.feedUrl),
+          url: Value(rss.url),
+          name: Value(rss.name),
+          desc: Value(rss.desc),
+          logo: Value(rss.logo),
+          categoryId: Value(rss.categoryId),
+          type: Value(rss.type),
+          readOrigin: Value(rss.readOrigin),
+          openPush: Value(rss.openPush),
+          grabOrigin: Value(rss.grabOrigin),
+        ),
+      );
+    } else {
+      await update(rssTable).replace(
+        RssTableData(
+          id: rss.id!,
+          name: rss.name,
+          desc: rss.desc,
+          logo: rss.logo,
+          url: rss.url,
+          feedUrl: rss.feedUrl,
+          categoryId: rss.categoryId,
+          type: rss.type,
+          readOrigin: rss.readOrigin,
+          openPush: rss.openPush,
+          grabOrigin: rss.grabOrigin,
+        ),
+      );
+    }
+    rss.id = fid;
+    // 需要更新 子 items;
+    await rss.refreshRssItems();
+    await rssItemDao.saveItems(rss.rssItems);
+    return fid;
   }
 
   // 删除 rss,

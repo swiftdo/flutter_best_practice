@@ -68,6 +68,7 @@ class RssItemModel {
       author: item.author ?? '',
       pubDate: item.pubDate?.toString() ?? '',
       content: item.content?.value ?? '',
+      cover: item.content?.images.first,
     );
   }
 }

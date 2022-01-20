@@ -43,6 +43,11 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
         return res;
       } else {
         res = res.copyWith(
+          title: element.title,
+          category: element.category,
+          link: element.link,
+          author: element.author,
+          cover: element.cover,
           desc: element.desc,
           content: element.content,
           pubDate: element.pubDate,

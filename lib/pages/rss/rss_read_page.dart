@@ -7,6 +7,7 @@ import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -194,14 +195,14 @@ class RssReadPage extends HookConsumerWidget {
                   spacing: 30,
                   children: [
                     _buildEditAction(
-                        icon: Icons.folder_outlined,
+                        icon: LineIcons.folder,
                         title: "分组",
                         enable: state.selectItems.isNotEmpty,
                         onTap: () {
                           ref.read(rssReadProvider.notifier).folder();
                         }),
                     _buildEditAction(
-                        icon: Icons.delete_outline,
+                        icon: LineIcons.trash,
                         title: "删除",
                         enable: state.selectItems.isNotEmpty,
                         onTap: () {
@@ -279,7 +280,7 @@ class RssReadPage extends HookConsumerWidget {
     final item = state.items[index];
     final cell = GestureDetector(
       onTap: () {
-        ref.refresh(gRouteProvider).push(RssArticlesRoute(rss: item));
+        ref.read(gRouteProvider).push(RssArticlesRoute(rss: item));
       },
       child: Container(
         decoration: BoxDecoration(

@@ -74,11 +74,7 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   addRss(Rss rss) async {
     if (rss.id == null) {
       // 保存rss
-      final fid = await rssDao.saveRss(rss);
-      rss.id = fid;
-      // 需要更新 子 items;
-      await rss.refreshRssItems();
-      await rssItemDao.saveItems(rss.rssItems);
+      await rssDao.saveRss(rss, rssItemDao: rssItemDao);
     }
   }
 }

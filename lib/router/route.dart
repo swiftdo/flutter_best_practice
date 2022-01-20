@@ -28,9 +28,9 @@ class AppRouteObserver extends AutoRouterObserver {
       AutoRoute(path: "read", page: RssReadPage),
       AutoRoute(path: "find", page: RssFindPage),
       AutoRoute(path: "config", page: RssConfigPage),
-      AutoRoute(path: "articles", page: RssArticlesPage),
-      AutoRoute(path: "article", page: RssArticlePage),
-    ])
+    ]),
+    AutoRoute(path: "articles", page: RssArticlesPage),
+    AutoRoute(path: "article", page: RssArticlePage),
   ],
 )
 class $AppRouter {}
