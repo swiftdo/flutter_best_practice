@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_articles_notifier.dart';
 import 'package:flutter_best_practice/provider.dart';
+import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -73,72 +74,106 @@ class RssArticlesPage extends HookConsumerWidget {
         child: ListView.builder(
           itemBuilder: (context, index) {
             final rssItem = state.rss.rssItems[index];
-            return Container(
-              clipBehavior: Clip.antiAlias,
-              margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                      offset: Offset.zero,
-                    ),
-                  ]),
-              child: Column(
-                children: [
-                  if (rssItem.cover != null && rssItem.cover!.isNotEmpty)
-                    CachedNetworkImage(
-                      width: double.infinity,
-                      height: 160,
-                      imageUrl: rssItem.cover!,
-                      fit: BoxFit.cover,
-                    ),
-                  Container(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Text(rssItem.title),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Text(
-                            rssItem.desc,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
+            return GestureDetector(
+              onTap: () {
+                ref.read(gRouteProvider).push(
+                      RssArticleRoute(
+                        rssItem: rssItem,
+                      ),
+                    );
+              },
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        offset: Offset.zero,
+                      ),
+                    ]),
+                child: Column(
+                  children: [
+                    if (rssItem.cover != null && rssItem.cover!.isNotEmpty)
+                      CachedNetworkImage(
+                        width: double.infinity,
+                        height: 160,
+                        imageUrl: rssItem.cover!,
+                        fit: BoxFit.cover,
+                      ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          left: 10, right: 10, bottom: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: Text(rssItem.title),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              rssItem.showDesc,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
+                          Container(
+                            margin: const EdgeInsets.only(top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(right: 5),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: rss.logo,
+                                        width: 20,
+                                        height: 20,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(rssItem.author),
+                                  ],
                                 ),
-                                child: CachedNetworkImage(
-                                  imageUrl: rss.logo,
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                                Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Icon(
+                                          LineIcons.calendar,
+                                          size: 16,
+                                        ),
+                                        Text(
+                                          rssItem.showDate,
+                                          style: const TextStyle(
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           },
