@@ -763,20 +763,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.27.3"
-  scroll_app_bar:
-    dependency: "direct main"
-    description:
-      name: scroll_app_bar
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.0"
-  scroll_bars_common:
-    dependency: transitive
-    description:
-      name: scroll_bars_common
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.0.0"
   scroll_to_index:
     dependency: "direct main"
     description:

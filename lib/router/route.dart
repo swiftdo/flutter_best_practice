@@ -20,10 +20,10 @@ class AppRouteObserver extends AutoRouterObserver {
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: MainPage, initial: true),
+    AutoRoute(path: "main", page: MainPage),
     AutoRoute(path: "joke", page: JokePages),
     AutoRoute(path: "demo-scroll", page: ScrollPage),
-    AutoRoute(path: "demo-rss", page: RssPage, children: [
+    AutoRoute(initial: true, page: RssPage, children: [
       AutoRoute(path: "index", page: RssIndexPage),
       AutoRoute(path: "read", page: RssReadPage),
       AutoRoute(path: "find", page: RssFindPage),
@@ -31,7 +31,7 @@ class AppRouteObserver extends AutoRouterObserver {
     ]),
     AutoRoute(path: "articles", page: RssArticlesPage),
     AutoRoute(path: "article", page: RssArticlePage),
-    AutoRoute(path: "phone-view", page: RssPhotoViewPage)
+    AutoRoute(path: "photo-view", page: RssPhotoViewPage)
   ],
 )
 class $AppRouter {}

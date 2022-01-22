@@ -91,10 +91,10 @@ class AppRouter extends _i12.RootStackRouter {
 
   @override
   List<_i12.RouteConfig> get routes => [
-        _i12.RouteConfig(MainRoute.name, path: '/'),
+        _i12.RouteConfig(MainRoute.name, path: 'main'),
         _i12.RouteConfig(JokeRoutes.name, path: 'joke'),
         _i12.RouteConfig(ScrollRoute.name, path: 'demo-scroll'),
-        _i12.RouteConfig(RssRoute.name, path: 'demo-rss', children: [
+        _i12.RouteConfig(RssRoute.name, path: '/', children: [
           _i12.RouteConfig(RssIndexRoute.name,
               path: 'index', parent: RssRoute.name),
           _i12.RouteConfig(RssReadRoute.name,
@@ -106,14 +106,14 @@ class AppRouter extends _i12.RootStackRouter {
         ]),
         _i12.RouteConfig(RssArticlesRoute.name, path: 'articles'),
         _i12.RouteConfig(RssArticleRoute.name, path: 'article'),
-        _i12.RouteConfig(RssPhotoViewRoute.name, path: 'phone-view')
+        _i12.RouteConfig(RssPhotoViewRoute.name, path: 'photo-view')
       ];
 }
 
 /// generated route for
 /// [_i1.MainPage]
 class MainRoute extends _i12.PageRouteInfo<void> {
-  const MainRoute() : super(MainRoute.name, path: '/');
+  const MainRoute() : super(MainRoute.name, path: 'main');
 
   static const String name = 'MainRoute';
 }
@@ -151,7 +151,7 @@ class ScrollRouteArgs {
 /// [_i4.RssPage]
 class RssRoute extends _i12.PageRouteInfo<void> {
   const RssRoute({List<_i12.PageRouteInfo>? children})
-      : super(RssRoute.name, path: 'demo-rss', initialChildren: children);
+      : super(RssRoute.name, path: '/', initialChildren: children);
 
   static const String name = 'RssRoute';
 }
@@ -208,7 +208,7 @@ class RssArticleRouteArgs {
 class RssPhotoViewRoute extends _i12.PageRouteInfo<RssPhotoViewRouteArgs> {
   RssPhotoViewRoute({_i13.Key? key, required String url})
       : super(RssPhotoViewRoute.name,
-            path: 'phone-view',
+            path: 'photo-view',
             args: RssPhotoViewRouteArgs(key: key, url: url));
 
   static const String name = 'RssPhotoViewRoute';
