@@ -13,11 +13,8 @@ import 'package:url_launcher/url_launcher.dart';
 /// 文章详情
 class RssArticlePage extends HookConsumerWidget {
   final RssItemModel rssItem;
-
   final controller = ScrollController();
-
   RssArticlePage({Key? key, required this.rssItem}) : super(key: key);
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
