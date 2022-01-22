@@ -8,6 +8,7 @@ import 'package:flutter_best_practice/pages/rss/rss_config_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_find_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_index_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_page.dart';
+import 'package:flutter_best_practice/pages/rss/rss_photo_view_page.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_page.dart';
 import 'package:flutter_best_practice/pages/scroll/scroll_page.dart';
 
@@ -19,7 +20,6 @@ class AppRouteObserver extends AutoRouterObserver {
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    //RedirectRoute(path: '*', redirectTo: '/'),
     AutoRoute(page: MainPage, initial: true),
     AutoRoute(path: "joke", page: JokePages),
     AutoRoute(path: "demo-scroll", page: ScrollPage),
@@ -31,6 +31,7 @@ class AppRouteObserver extends AutoRouterObserver {
     ]),
     AutoRoute(path: "articles", page: RssArticlesPage),
     AutoRoute(path: "article", page: RssArticlePage),
+    AutoRoute(path: "phone-view", page: RssPhotoViewPage)
   ],
 )
 class $AppRouter {}

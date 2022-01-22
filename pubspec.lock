@@ -658,6 +658,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.4.0"
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.13.0"
   platform:
     dependency: transitive
     description:
@@ -756,6 +763,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.27.3"
+  scroll_app_bar:
+    dependency: "direct main"
+    description:
+      name: scroll_app_bar
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
+  scroll_bars_common:
+    dependency: transitive
+    description:
+      name: scroll_bars_common
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   scroll_to_index:
     dependency: "direct main"
     description:
@@ -929,6 +950,62 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.4"
+  url_launcher:
+    dependency: "direct main"
+    description:
+      name: url_launcher
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.18"
+  url_launcher_android:
+    dependency: transitive
+    description:
+      name: url_launcher_android
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.14"
+  url_launcher_ios:
+    dependency: transitive
+    description:
+      name: url_launcher_ios
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "6.0.14"
+  url_launcher_linux:
+    dependency: transitive
+    description:
+      name: url_launcher_linux
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.3"
+  url_launcher_macos:
+    dependency: transitive
+    description:
+      name: url_launcher_macos
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.3"
+  url_launcher_platform_interface:
+    dependency: transitive
+    description:
+      name: url_launcher_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.5"
+  url_launcher_web:
+    dependency: transitive
+    description:
+      name: url_launcher_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.6"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
   uuid:
     dependency: transitive
     description:

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +74,8 @@ class RssArticlesPage extends HookConsumerWidget {
               .onRefresh(_refreshController);
         },
         child: ListView.builder(
+          padding: EdgeInsets.only(
+              bottom: max(MediaQuery.of(context).padding.bottom, 10)),
           itemBuilder: (context, index) {
             final rssItem = state.rss.rssItems[index];
             return GestureDetector(

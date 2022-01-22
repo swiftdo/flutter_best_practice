@@ -10,101 +10,109 @@
 //
 // ignore_for_file: type=lint
 
-import 'package:auto_route/auto_route.dart' as _i11;
-import 'package:flutter/material.dart' as _i12;
+import 'package:auto_route/auto_route.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 
 import '../pages/jokes/jokes_page.dart' as _i2;
 import '../pages/main/main_page.dart' as _i1;
-import '../pages/rss/model/rss.dart' as _i13;
-import '../pages/rss/model/rss_item_model.dart' as _i14;
+import '../pages/rss/model/rss.dart' as _i14;
+import '../pages/rss/model/rss_item_model.dart' as _i15;
 import '../pages/rss/rss_article_page.dart' as _i6;
 import '../pages/rss/rss_articles_page.dart' as _i5;
-import '../pages/rss/rss_config_page.dart' as _i10;
-import '../pages/rss/rss_find_page.dart' as _i9;
-import '../pages/rss/rss_index_page.dart' as _i7;
+import '../pages/rss/rss_config_page.dart' as _i11;
+import '../pages/rss/rss_find_page.dart' as _i10;
+import '../pages/rss/rss_index_page.dart' as _i8;
 import '../pages/rss/rss_page.dart' as _i4;
-import '../pages/rss/rss_read_page.dart' as _i8;
+import '../pages/rss/rss_photo_view_page.dart' as _i7;
+import '../pages/rss/rss_read_page.dart' as _i9;
 import '../pages/scroll/scroll_page.dart' as _i3;
 
-class AppRouter extends _i11.RootStackRouter {
-  AppRouter([_i12.GlobalKey<_i12.NavigatorState>? navigatorKey])
+class AppRouter extends _i12.RootStackRouter {
+  AppRouter([_i13.GlobalKey<_i13.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i11.PageFactory> pagesMap = {
+  final Map<String, _i12.PageFactory> pagesMap = {
     MainRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i1.MainPage());
     },
     JokeRoutes.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i2.JokePages());
     },
     ScrollRoute.name: (routeData) {
       final args = routeData.argsAs<ScrollRouteArgs>(
           orElse: () => const ScrollRouteArgs());
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: _i3.ScrollPage(key: args.key));
     },
     RssRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData, child: const _i4.RssPage());
     },
     RssArticlesRoute.name: (routeData) {
       final args = routeData.argsAs<RssArticlesRouteArgs>();
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i5.RssArticlesPage(key: args.key, rss: args.rss));
     },
     RssArticleRoute.name: (routeData) {
       final args = routeData.argsAs<RssArticleRouteArgs>();
-      return _i11.MaterialPageX<dynamic>(
+      return _i12.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i6.RssArticlePage(key: args.key, rssItem: args.rssItem));
     },
+    RssPhotoViewRoute.name: (routeData) {
+      final args = routeData.argsAs<RssPhotoViewRouteArgs>();
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: _i7.RssPhotoViewPage(key: args.key, url: args.url));
+    },
     RssIndexRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i7.RssIndexPage());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i8.RssIndexPage());
     },
     RssReadRoute.name: (routeData) {
       final args = routeData.argsAs<RssReadRouteArgs>(
           orElse: () => const RssReadRouteArgs());
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i8.RssReadPage(key: args.key));
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: _i9.RssReadPage(key: args.key));
     },
     RssFindRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i9.RssFindPage());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i10.RssFindPage());
     },
     RssConfigRoute.name: (routeData) {
-      return _i11.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i10.RssConfigPage());
+      return _i12.MaterialPageX<dynamic>(
+          routeData: routeData, child: const _i11.RssConfigPage());
     }
   };
 
   @override
-  List<_i11.RouteConfig> get routes => [
-        _i11.RouteConfig(MainRoute.name, path: '/'),
-        _i11.RouteConfig(JokeRoutes.name, path: 'joke'),
-        _i11.RouteConfig(ScrollRoute.name, path: 'demo-scroll'),
-        _i11.RouteConfig(RssRoute.name, path: 'demo-rss', children: [
-          _i11.RouteConfig(RssIndexRoute.name,
+  List<_i12.RouteConfig> get routes => [
+        _i12.RouteConfig(MainRoute.name, path: '/'),
+        _i12.RouteConfig(JokeRoutes.name, path: 'joke'),
+        _i12.RouteConfig(ScrollRoute.name, path: 'demo-scroll'),
+        _i12.RouteConfig(RssRoute.name, path: 'demo-rss', children: [
+          _i12.RouteConfig(RssIndexRoute.name,
               path: 'index', parent: RssRoute.name),
-          _i11.RouteConfig(RssReadRoute.name,
+          _i12.RouteConfig(RssReadRoute.name,
               path: 'read', parent: RssRoute.name),
-          _i11.RouteConfig(RssFindRoute.name,
+          _i12.RouteConfig(RssFindRoute.name,
               path: 'find', parent: RssRoute.name),
-          _i11.RouteConfig(RssConfigRoute.name,
+          _i12.RouteConfig(RssConfigRoute.name,
               path: 'config', parent: RssRoute.name)
         ]),
-        _i11.RouteConfig(RssArticlesRoute.name, path: 'articles'),
-        _i11.RouteConfig(RssArticleRoute.name, path: 'article')
+        _i12.RouteConfig(RssArticlesRoute.name, path: 'articles'),
+        _i12.RouteConfig(RssArticleRoute.name, path: 'article'),
+        _i12.RouteConfig(RssPhotoViewRoute.name, path: 'phone-view')
       ];
 }
 
 /// generated route for
 /// [_i1.MainPage]
-class MainRoute extends _i11.PageRouteInfo<void> {
+class MainRoute extends _i12.PageRouteInfo<void> {
   const MainRoute() : super(MainRoute.name, path: '/');
 
   static const String name = 'MainRoute';
@@ -112,7 +120,7 @@ class MainRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.JokePages]
-class JokeRoutes extends _i11.PageRouteInfo<void> {
+class JokeRoutes extends _i12.PageRouteInfo<void> {
   const JokeRoutes() : super(JokeRoutes.name, path: 'joke');
 
   static const String name = 'JokeRoutes';
@@ -120,8 +128,8 @@ class JokeRoutes extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ScrollPage]
-class ScrollRoute extends _i11.PageRouteInfo<ScrollRouteArgs> {
-  ScrollRoute({_i12.Key? key})
+class ScrollRoute extends _i12.PageRouteInfo<ScrollRouteArgs> {
+  ScrollRoute({_i13.Key? key})
       : super(ScrollRoute.name,
             path: 'demo-scroll', args: ScrollRouteArgs(key: key));
 
@@ -131,7 +139,7 @@ class ScrollRoute extends _i11.PageRouteInfo<ScrollRouteArgs> {
 class ScrollRouteArgs {
   const ScrollRouteArgs({this.key});
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
   @override
   String toString() {
@@ -141,8 +149,8 @@ class ScrollRouteArgs {
 
 /// generated route for
 /// [_i4.RssPage]
-class RssRoute extends _i11.PageRouteInfo<void> {
-  const RssRoute({List<_i11.PageRouteInfo>? children})
+class RssRoute extends _i12.PageRouteInfo<void> {
+  const RssRoute({List<_i12.PageRouteInfo>? children})
       : super(RssRoute.name, path: 'demo-rss', initialChildren: children);
 
   static const String name = 'RssRoute';
@@ -150,8 +158,8 @@ class RssRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.RssArticlesPage]
-class RssArticlesRoute extends _i11.PageRouteInfo<RssArticlesRouteArgs> {
-  RssArticlesRoute({_i12.Key? key, required _i13.Rss rss})
+class RssArticlesRoute extends _i12.PageRouteInfo<RssArticlesRouteArgs> {
+  RssArticlesRoute({_i13.Key? key, required _i14.Rss rss})
       : super(RssArticlesRoute.name,
             path: 'articles', args: RssArticlesRouteArgs(key: key, rss: rss));
 
@@ -161,9 +169,9 @@ class RssArticlesRoute extends _i11.PageRouteInfo<RssArticlesRouteArgs> {
 class RssArticlesRouteArgs {
   const RssArticlesRouteArgs({this.key, required this.rss});
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
-  final _i13.Rss rss;
+  final _i14.Rss rss;
 
   @override
   String toString() {
@@ -173,8 +181,8 @@ class RssArticlesRouteArgs {
 
 /// generated route for
 /// [_i6.RssArticlePage]
-class RssArticleRoute extends _i11.PageRouteInfo<RssArticleRouteArgs> {
-  RssArticleRoute({_i12.Key? key, required _i14.RssItemModel rssItem})
+class RssArticleRoute extends _i12.PageRouteInfo<RssArticleRouteArgs> {
+  RssArticleRoute({_i13.Key? key, required _i15.RssItemModel rssItem})
       : super(RssArticleRoute.name,
             path: 'article',
             args: RssArticleRouteArgs(key: key, rssItem: rssItem));
@@ -185,9 +193,9 @@ class RssArticleRoute extends _i11.PageRouteInfo<RssArticleRouteArgs> {
 class RssArticleRouteArgs {
   const RssArticleRouteArgs({this.key, required this.rssItem});
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
-  final _i14.RssItemModel rssItem;
+  final _i15.RssItemModel rssItem;
 
   @override
   String toString() {
@@ -196,17 +204,41 @@ class RssArticleRouteArgs {
 }
 
 /// generated route for
-/// [_i7.RssIndexPage]
-class RssIndexRoute extends _i11.PageRouteInfo<void> {
+/// [_i7.RssPhotoViewPage]
+class RssPhotoViewRoute extends _i12.PageRouteInfo<RssPhotoViewRouteArgs> {
+  RssPhotoViewRoute({_i13.Key? key, required String url})
+      : super(RssPhotoViewRoute.name,
+            path: 'phone-view',
+            args: RssPhotoViewRouteArgs(key: key, url: url));
+
+  static const String name = 'RssPhotoViewRoute';
+}
+
+class RssPhotoViewRouteArgs {
+  const RssPhotoViewRouteArgs({this.key, required this.url});
+
+  final _i13.Key? key;
+
+  final String url;
+
+  @override
+  String toString() {
+    return 'RssPhotoViewRouteArgs{key: $key, url: $url}';
+  }
+}
+
+/// generated route for
+/// [_i8.RssIndexPage]
+class RssIndexRoute extends _i12.PageRouteInfo<void> {
   const RssIndexRoute() : super(RssIndexRoute.name, path: 'index');
 
   static const String name = 'RssIndexRoute';
 }
 
 /// generated route for
-/// [_i8.RssReadPage]
-class RssReadRoute extends _i11.PageRouteInfo<RssReadRouteArgs> {
-  RssReadRoute({_i12.Key? key})
+/// [_i9.RssReadPage]
+class RssReadRoute extends _i12.PageRouteInfo<RssReadRouteArgs> {
+  RssReadRoute({_i13.Key? key})
       : super(RssReadRoute.name,
             path: 'read', args: RssReadRouteArgs(key: key));
 
@@ -216,7 +248,7 @@ class RssReadRoute extends _i11.PageRouteInfo<RssReadRouteArgs> {
 class RssReadRouteArgs {
   const RssReadRouteArgs({this.key});
 
-  final _i12.Key? key;
+  final _i13.Key? key;
 
   @override
   String toString() {
@@ -225,16 +257,16 @@ class RssReadRouteArgs {
 }
 
 /// generated route for
-/// [_i9.RssFindPage]
-class RssFindRoute extends _i11.PageRouteInfo<void> {
+/// [_i10.RssFindPage]
+class RssFindRoute extends _i12.PageRouteInfo<void> {
   const RssFindRoute() : super(RssFindRoute.name, path: 'find');
 
   static const String name = 'RssFindRoute';
 }
 
 /// generated route for
-/// [_i10.RssConfigPage]
-class RssConfigRoute extends _i11.PageRouteInfo<void> {
+/// [_i11.RssConfigPage]
+class RssConfigRoute extends _i12.PageRouteInfo<void> {
   const RssConfigRoute() : super(RssConfigRoute.name, path: 'config');
 
   static const String name = 'RssConfigRoute';
