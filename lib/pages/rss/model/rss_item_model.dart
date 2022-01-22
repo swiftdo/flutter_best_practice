@@ -13,7 +13,7 @@ class RssItemModel {
   final String content; // 文章内容
   final String link; // 文章链接
   final String author; // 作者
-  final String pubDate; // 发布日期
+  final int pubDate; // 发布日期
   final String? category; // 文章分类
   final String? cover; // 文章封面
   final bool isRead; // 是否已读
@@ -37,12 +37,16 @@ class RssItemModel {
   }) : showDesc = StringUtil.stripHtmlIfNeeded(desc);
 
   String get showDate {
-    String res = pubDate;
-    final DateTime? dateTime = DateUtil.getDateTime(res);
-    if (dateTime != null) {
-      res = TimelineUtil.formatByDateTime(dateTime);
+    final DateTime? dateTime = DateUtil.getDateTimeByMs(pubDate);
+    return TimelineUtil.formatByDateTime(dateTime!);
+  }
+
+  static int getPublishDateFrom(String? dateStr) {
+    if (dateStr == null) {
+      return 0;
     }
-    return res;
+    final DateTime? dateTime = DateUtil.getDateTime(dateStr);
+    return dateTime?.millisecondsSinceEpoch ?? 0;
   }
 
   static RssItemModel fromAtomItem(AtomItem item, int fid, int cateId) {
@@ -53,7 +57,7 @@ class RssItemModel {
       desc: item.summary ?? '',
       link: item.links?.first.href ?? '',
       author: item.authors?.first.name ?? '',
-      pubDate: item.published ?? '',
+      pubDate: getPublishDateFrom(item.published),
       content: item.content ?? '',
     );
   }
@@ -74,7 +78,7 @@ class RssItemModel {
       desc: item.description ?? '',
       link: item.link ?? '',
       author: author ?? '',
-      pubDate: pubDate ?? '',
+      pubDate: getPublishDateFrom(pubDate),
       content: item.content?.value ?? '',
       cover: item.content?.images.first,
     );

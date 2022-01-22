@@ -10,7 +10,7 @@ class RssItemTable extends Table {
   TextColumn get content => text()(); // 文章内容
   TextColumn get link => text()(); // 文章链接
   TextColumn get author => text()(); // 作者
-  TextColumn get pubDate => text()(); // 发布日期
+  IntColumn get pubDate => integer()(); // 发布日期
   TextColumn get category => text().nullable()(); // 文章分类
   TextColumn get cover => text().nullable()(); // 文章封面
   BoolColumn get isRead =>

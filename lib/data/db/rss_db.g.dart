@@ -530,7 +530,7 @@ class RssItemTableData extends DataClass
   final String content;
   final String link;
   final String author;
-  final String pubDate;
+  final int pubDate;
   final String? category;
   final String? cover;
   final bool isRead;
@@ -569,7 +569,7 @@ class RssItemTableData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}link'])!,
       author: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}author'])!,
-      pubDate: const StringType()
+      pubDate: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}pub_date'])!,
       category: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}category']),
@@ -592,7 +592,7 @@ class RssItemTableData extends DataClass
     map['content'] = Variable<String>(content);
     map['link'] = Variable<String>(link);
     map['author'] = Variable<String>(author);
-    map['pub_date'] = Variable<String>(pubDate);
+    map['pub_date'] = Variable<int>(pubDate);
     if (!nullToAbsent || category != null) {
       map['category'] = Variable<String?>(category);
     }
@@ -637,7 +637,7 @@ class RssItemTableData extends DataClass
       content: serializer.fromJson<String>(json['content']),
       link: serializer.fromJson<String>(json['link']),
       author: serializer.fromJson<String>(json['author']),
-      pubDate: serializer.fromJson<String>(json['pubDate']),
+      pubDate: serializer.fromJson<int>(json['pubDate']),
       category: serializer.fromJson<String?>(json['category']),
       cover: serializer.fromJson<String?>(json['cover']),
       isRead: serializer.fromJson<bool>(json['isRead']),
@@ -656,7 +656,7 @@ class RssItemTableData extends DataClass
       'content': serializer.toJson<String>(content),
       'link': serializer.toJson<String>(link),
       'author': serializer.toJson<String>(author),
-      'pubDate': serializer.toJson<String>(pubDate),
+      'pubDate': serializer.toJson<int>(pubDate),
       'category': serializer.toJson<String?>(category),
       'cover': serializer.toJson<String?>(cover),
       'isRead': serializer.toJson<bool>(isRead),
@@ -673,7 +673,7 @@ class RssItemTableData extends DataClass
           String? content,
           String? link,
           String? author,
-          String? pubDate,
+          int? pubDate,
           String? category,
           String? cover,
           bool? isRead,
@@ -744,7 +744,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
   final Value<String> content;
   final Value<String> link;
   final Value<String> author;
-  final Value<String> pubDate;
+  final Value<int> pubDate;
   final Value<String?> category;
   final Value<String?> cover;
   final Value<bool> isRead;
@@ -773,7 +773,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     required String content,
     required String link,
     required String author,
-    required String pubDate,
+    required int pubDate,
     this.category = const Value.absent(),
     this.cover = const Value.absent(),
     this.isRead = const Value.absent(),
@@ -795,7 +795,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     Expression<String>? content,
     Expression<String>? link,
     Expression<String>? author,
-    Expression<String>? pubDate,
+    Expression<int>? pubDate,
     Expression<String?>? category,
     Expression<String?>? cover,
     Expression<bool>? isRead,
@@ -827,7 +827,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       Value<String>? content,
       Value<String>? link,
       Value<String>? author,
-      Value<String>? pubDate,
+      Value<int>? pubDate,
       Value<String?>? category,
       Value<String?>? cover,
       Value<bool>? isRead,
@@ -877,7 +877,7 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       map['author'] = Variable<String>(author.value);
     }
     if (pubDate.present) {
-      map['pub_date'] = Variable<String>(pubDate.value);
+      map['pub_date'] = Variable<int>(pubDate.value);
     }
     if (category.present) {
       map['category'] = Variable<String?>(category.value);
@@ -964,9 +964,9 @@ class $RssItemTableTable extends RssItemTable
       type: const StringType(), requiredDuringInsert: true);
   final VerificationMeta _pubDateMeta = const VerificationMeta('pubDate');
   @override
-  late final GeneratedColumn<String?> pubDate = GeneratedColumn<String?>(
+  late final GeneratedColumn<int?> pubDate = GeneratedColumn<int?>(
       'pub_date', aliasedName, false,
-      type: const StringType(), requiredDuringInsert: true);
+      type: const IntType(), requiredDuringInsert: true);
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
   @override
   late final GeneratedColumn<String?> category = GeneratedColumn<String?>(
