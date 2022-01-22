@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_articles_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -80,6 +80,7 @@ class RssArticlesPage extends HookConsumerWidget {
             final rssItem = state.rss.rssItems[index];
             return GestureDetector(
               onTap: () {
+                rssItem.rssLogo = rss.logo;
                 ref.read(gRouteProvider).push(
                       RssArticleRoute(
                         rssItem: rssItem,
@@ -102,7 +103,7 @@ class RssArticlesPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     if (rssItem.cover != null && rssItem.cover!.isNotEmpty)
-                      CachedNetworkImage(
+                      CacheImage(
                         width: double.infinity,
                         height: 160,
                         imageUrl: rssItem.cover!,
@@ -137,17 +138,13 @@ class RssArticlesPage extends HookConsumerWidget {
                               children: [
                                 Row(
                                   children: [
-                                    Container(
+                                    CacheImage(
                                       margin: const EdgeInsets.only(right: 5),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: CachedNetworkImage(
-                                        imageUrl: rss.logo,
-                                        width: 20,
-                                        height: 20,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                      imageUrl: rss.logo,
+                                      width: 20,
+                                      height: 20,
+                                      fit: BoxFit.cover,
                                     ),
                                     Text(rssItem.author),
                                   ],

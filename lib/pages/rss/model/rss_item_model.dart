@@ -20,6 +20,8 @@ class RssItemModel {
   final bool isCached; // 是否已缓存
   final String showDesc; // 去除标签的desc
 
+  String? rssLogo; // 详情页要用
+
   RssItemModel({
     this.id,
     required this.fid,
@@ -50,21 +52,28 @@ class RssItemModel {
   }
 
   static RssItemModel fromAtomItem(AtomItem item, int fid, int cateId) {
+    final title = item.title ?? '';
+    final desc = item.summary ?? title;
+    final content = item.content ?? desc;
     return RssItemModel(
       fid: fid,
       cateId: cateId,
-      title: item.title ?? '',
-      desc: item.summary ?? '',
+      title: title,
+      desc: desc,
       link: item.links?.first.href ?? '',
       author: item.authors?.first.name ?? '',
       pubDate: getPublishDateFrom(item.published),
-      content: item.content ?? '',
+      content: content,
     );
   }
 
   static RssItemModel fromRssItem(RssItem item, int fid, int cateId) {
     String? author = item.author;
     author ??= item.dc?.creator;
+
+    String title = item.title ?? '';
+    String desc = item.description ?? title;
+    String content = item.content?.value ?? desc;
 
     String? pubDate;
     if (item.pubDate != null) {
@@ -74,12 +83,12 @@ class RssItemModel {
     return RssItemModel(
       fid: fid,
       cateId: cateId,
-      title: item.title ?? '',
-      desc: item.description ?? '',
+      title: title,
+      desc: desc,
       link: item.link ?? '',
       author: author ?? '',
       pubDate: getPublishDateFrom(pubDate),
-      content: item.content?.value ?? '',
+      content: content,
       cover: item.content?.images.first,
     );
   }

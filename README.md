@@ -7,6 +7,6 @@ fvm flutter pub run build_runner watch --delete-conflicting-outputs
 
 ```shell
 https://coolshell.cn/feed
-http://onevcat.com/atom.xml
 http://www.ruanyifeng.com/blog/atom.xml
+http://www.raychase.net/feed
 ```

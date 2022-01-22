@@ -83,8 +83,9 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
   Future<List<RssItemModel>> getItems(int fid) async {
     final res = await (select(rssItemTable)
           ..where((tbl) => tbl.fid.equals(fid))
-          ..orderBy(
-              [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.asc)]))
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.pubDate, mode: OrderingMode.asc)
+          ]))
         .get();
 
     return res.map((e) => e.toRssItemModel()).toList();

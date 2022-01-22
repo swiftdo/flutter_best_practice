@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -12,6 +13,7 @@ import 'package:url_launcher/url_launcher.dart';
 /// 文章详情
 class RssArticlePage extends HookConsumerWidget {
   final RssItemModel rssItem;
+
   final controller = ScrollController();
 
   RssArticlePage({Key? key, required this.rssItem}) : super(key: key);
@@ -36,6 +38,66 @@ class RssArticlePage extends HookConsumerWidget {
         title: Text(
           rssItem.title,
           style: const TextStyle(color: Colors.black),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(34),
+          child: Container(
+            height: 34,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CacheImage(
+                      imageUrl: rssItem.rssLogo ?? '',
+                      width: 16,
+                      height: 16,
+                      fit: BoxFit.cover,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      rssItem.author,
+                      style: const TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          LineIcons.calendar,
+                          size: 16,
+                        ),
+                        Text(
+                          rssItem.showDate,
+                          style: const TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        launch(rssItem.link);
+                      },
+                      child: const Text(
+                        "阅读原文",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 12,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
+import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -298,7 +299,7 @@ class RssReadPage extends HookConsumerWidget {
         alignment: Alignment.center,
         child: Column(
           children: [
-            CachedNetworkImage(
+            CacheImage(
               width: 40,
               height: 40,
               imageUrl: item.logo,

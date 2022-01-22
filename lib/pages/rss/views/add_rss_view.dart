@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -6,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';
 
 import 'add_rss_notifier.dart';
+import 'cache_image.dart';
 
 class AddRssView extends HookConsumerWidget {
   const AddRssView({Key? key}) : super(key: key);
@@ -18,18 +18,13 @@ class AddRssView extends HookConsumerWidget {
     if (rss != null) {
       return Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50), color: Colors.grey),
+          CacheImage(
             margin: const EdgeInsets.only(top: 20),
-            child: CachedNetworkImage(
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
-              imageUrl: rss.logo,
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+            borderRadius: BorderRadius.circular(50),
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
+            imageUrl: rss.logo,
           ),
           Container(
             margin: const EdgeInsets.only(top: 20),
@@ -37,10 +32,17 @@ class AddRssView extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text("URL"),
-                Text(
-                  rss.url,
-                  style: const TextStyle(color: Colors.black54),
-                ),
+                Expanded(
+                    child: Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    rss.url,
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 12,
+                    ),
+                  ),
+                )),
               ],
             ),
           ),
