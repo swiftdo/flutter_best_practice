@@ -29,7 +29,7 @@ class RssReadState {
       res.addAll(rss.rssItems.map((e) => e));
     }
 
-    res.sort((a, b) => a.pubDate.compareTo(b.pubDate));
+    res.sort((a, b) => b.pubDate.compareTo(a.pubDate));
 
     return res;
   }
