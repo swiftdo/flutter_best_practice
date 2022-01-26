@@ -70,8 +70,10 @@ class AppRouter extends _i12.RootStackRouter {
           routeData: routeData, child: _i7.ScrollPage(key: args.key));
     },
     RssIndexRoute.name: (routeData) {
+      final args = routeData.argsAs<RssIndexRouteArgs>(
+          orElse: () => const RssIndexRouteArgs());
       return _i12.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i8.RssIndexPage());
+          routeData: routeData, child: _i8.RssIndexPage(key: args.key));
     },
     RssReadRoute.name: (routeData) {
       final args = routeData.argsAs<RssReadRouteArgs>(
@@ -229,10 +231,23 @@ class ScrollRouteArgs {
 
 /// generated route for
 /// [_i8.RssIndexPage]
-class RssIndexRoute extends _i12.PageRouteInfo<void> {
-  const RssIndexRoute() : super(RssIndexRoute.name, path: 'index');
+class RssIndexRoute extends _i12.PageRouteInfo<RssIndexRouteArgs> {
+  RssIndexRoute({_i13.Key? key})
+      : super(RssIndexRoute.name,
+            path: 'index', args: RssIndexRouteArgs(key: key));
 
   static const String name = 'RssIndexRoute';
+}
+
+class RssIndexRouteArgs {
+  const RssIndexRouteArgs({this.key});
+
+  final _i13.Key? key;
+
+  @override
+  String toString() {
+    return 'RssIndexRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

@@ -1,14 +1,14 @@
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
-import 'package:flutter_best_practice/pages/rss/views/add_rss_notifier.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../provider.dart';
 import 'model/rss.dart';
 
 enum ViewState {
-  idea, //
+  idle, //
   busy,
   empty,
   error,
@@ -36,7 +36,7 @@ class RssReadState {
         hasMore = false,
         selectItems = [],
         isEditMode = false,
-        viewState = ViewState.idea;
+        viewState = ViewState.idle;
 
   RssReadState copy(
       {ViewState? viewState,
@@ -60,6 +60,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
 
   final RssDao rssDao;
   final RssItemDao rssItemDao;
+
   RssReadNotifier({required this.rssDao, required this.rssItemDao})
       : super(RssReadState.initial());
 
@@ -126,7 +127,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
       );
     } else {
       state = state.copy(
-        viewState: ViewState.idea,
+        viewState: ViewState.idle,
         items: res,
         hasMore: res.length >= _pageSize,
       );
@@ -144,7 +145,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
     );
     refreshController.loadComplete();
     state.copy(
-      viewState: ViewState.idea,
+      viewState: ViewState.idle,
       items: [...state.items, ...res],
       hasMore: res.length >= _pageSize,
     );

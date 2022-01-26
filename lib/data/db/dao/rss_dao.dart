@@ -29,10 +29,20 @@ extension RssTableDataExt on RssTableData {
 class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
   RssDao(RssDatabase db) : super(db);
 
-  Future<List<Rss>> getRssList(
-      {required int page,
-      required int pageSize,
-      required RssItemDao rssItemDao}) async {
+  /// 获取rss 不用同步items
+  Future<List<Rss>> getAllRssWithoutSyncItems() async {
+    final res = await (select(rssTable)
+          ..orderBy(
+              [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)]))
+        .get();
+    return res.map((e) => e.toRss()).toList();
+  }
+
+  Future<List<Rss>> getRssList({
+    required int page,
+    required int pageSize,
+    required RssItemDao rssItemDao,
+  }) async {
     final res = await (select(rssTable)
           ..orderBy(
               [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)])

@@ -30,6 +30,19 @@ extension RssItemTableDataExt on RssItemTableData {
 class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
   RssItemDao(RssDatabase attachedDatabase) : super(attachedDatabase);
 
+  /// 获取列表, 按时间排序
+  Future<List<RssItemModel>> fetchItems(
+      {required int page, required int pageSize}) async {
+    final res = await (select(rssItemTable)
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.pubDate, mode: OrderingMode.asc)
+          ])
+          ..limit(pageSize, offset: (page - 1) * pageSize))
+        .get();
+
+    return res.map((e) => e.toRssItemModel()).toList();
+  }
+
   /// 保存多个
   Future<List<int>> saveItems(List<RssItemModel> items) async {
     final futures = items.map((element) async {

@@ -13,7 +13,7 @@ class RssPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AutoTabsScaffold(
       routes: [
-        const RssIndexRoute(),
+        RssIndexRoute(),
         RssReadRoute(),
         const RssFindRoute(),
         const RssConfigRoute(),

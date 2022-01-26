@@ -79,20 +79,6 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   }
 }
 
-final rssDaoProvider = Provider((ref) {
-  final db = ref.watch(gDb);
-  return RssDao(db);
-});
-
-final rssItemDaoProvider = Provider((ref) {
-  final db = ref.watch(gDb);
-  return RssItemDao(db);
-});
-
-final repositoryProvider = Provider.autoDispose<IRssRepository>((ref) {
-  return RssRepository();
-});
-
 final addRssProvider =
     StateNotifierProvider.autoDispose<AddRssNotifier, AddRssState>((ref) {
   final repository = ref.watch(repositoryProvider);
