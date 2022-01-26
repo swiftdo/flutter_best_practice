@@ -38,21 +38,22 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
     return res.map((e) => e.toRss()).toList();
   }
 
-  Future<List<Rss>> getRssList({
-    required int page,
-    required int pageSize,
+  Future<List<Rss>> getAllRssList({
     required RssItemDao rssItemDao,
   }) async {
     final res = await (select(rssTable)
           ..orderBy(
-              [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)])
-          ..limit(pageSize, offset: (page - 1) * pageSize))
+              [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)]))
         .get();
-    final futures = res.map((e) async {
-      final items = await rssItemDao.getItems(e.id);
-      return e.toRss(items: items);
-    }).toList();
-    return await Future.wait(futures);
+
+    if (res.isNotEmpty) {
+      final futures = res.map((e) async {
+        final items = await rssItemDao.getItems(e.id);
+        return e.toRss(items: items);
+      }).toList();
+      return await Future.wait(futures);
+    }
+    return [];
   }
 
   Future<Rss?> getRss(String feedUrl, RssItemDao itemDao) async {

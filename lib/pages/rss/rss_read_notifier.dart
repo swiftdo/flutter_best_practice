@@ -1,5 +1,6 @@
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -16,38 +17,43 @@ enum ViewState {
 
 class RssReadState {
   final List<Rss> items;
-  final bool hasMore;
 
   final List<Rss> selectItems; // 选中的items;
   final bool isEditMode; // 编辑状态
 
   final ViewState viewState;
 
+  List<RssItemModel> get allRssItems {
+    List<RssItemModel> res = [];
+    for (var rss in items) {
+      res.addAll(rss.rssItems.map((e) => e));
+    }
+
+    res.sort((a, b) => a.pubDate.compareTo(b.pubDate));
+
+    return res;
+  }
+
   RssReadState({
     required this.items,
     required this.viewState,
-    required this.hasMore,
     required this.selectItems,
     required this.isEditMode,
   });
 
-  RssReadState.initial()
-      : items = [],
-        hasMore = false,
-        selectItems = [],
+  RssReadState.initial(this.items)
+      : selectItems = [],
         isEditMode = false,
         viewState = ViewState.idle;
 
   RssReadState copy(
       {ViewState? viewState,
       List<Rss>? items,
-      bool? hasMore,
       List<Rss>? selectItems,
       bool? isEditMode}) {
     return RssReadState(
       viewState: viewState ?? this.viewState,
       items: items ?? this.items,
-      hasMore: hasMore ?? this.hasMore,
       selectItems: selectItems ?? this.selectItems,
       isEditMode: isEditMode ?? this.isEditMode,
     );
@@ -55,14 +61,15 @@ class RssReadState {
 }
 
 class RssReadNotifier extends StateNotifier<RssReadState> {
-  int _page = 1;
-  final int _pageSize = 12;
-
   final RssDao rssDao;
   final RssItemDao rssItemDao;
 
-  RssReadNotifier({required this.rssDao, required this.rssItemDao})
-      : super(RssReadState.initial());
+  RssReadNotifier({
+    required this.rssDao,
+    required this.rssItemDao,
+  }) : super(
+          RssReadState.initial([]),
+        );
 
   addRss(Rss rss) {
     state = state.copy(items: [rss, ...state.items]);
@@ -110,45 +117,28 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   }
 
   // 下拉刷新
-  onRefresh(RefreshController refreshController) async {
-    _page = 1;
+  onRefresh({RefreshController? refreshController}) async {
     state = state.copy(viewState: ViewState.busy);
-    final res = await rssDao.getRssList(
-      page: _page,
-      pageSize: _pageSize,
-      rssItemDao: rssItemDao,
-    );
-    refreshController.refreshCompleted();
-    if (res.isEmpty) {
-      state = state.copy(
-        viewState: ViewState.empty,
-        items: [],
-        hasMore: false,
+    try {
+      final res = await rssDao.getAllRssList(
+        rssItemDao: rssItemDao,
       );
-    } else {
-      state = state.copy(
-        viewState: ViewState.idle,
-        items: res,
-        hasMore: res.length >= _pageSize,
-      );
+      refreshController?.refreshCompleted();
+      if (res.isEmpty) {
+        state = state.copy(
+          viewState: ViewState.empty,
+          items: [],
+        );
+      } else {
+        state = state.copy(
+          viewState: ViewState.idle,
+          items: res,
+        );
+      }
+    } catch (e) {
+      refreshController?.refreshCompleted();
+      state = state.copy(viewState: ViewState.error);
     }
-  }
-
-  // 加载下一页
-  onLoading(RefreshController refreshController) async {
-    _page += 1;
-    state.copy(viewState: ViewState.busy);
-    final res = await rssDao.getRssList(
-      page: _page,
-      pageSize: _pageSize,
-      rssItemDao: rssItemDao,
-    );
-    refreshController.loadComplete();
-    state.copy(
-      viewState: ViewState.idle,
-      items: [...state.items, ...res],
-      hasMore: res.length >= _pageSize,
-    );
   }
 }
 

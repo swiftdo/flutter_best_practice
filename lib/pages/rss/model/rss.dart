@@ -41,14 +41,11 @@ class Rss {
     if (items != null) {
       if (isAtom) {
         List<AtomItem> feeds = items as List<AtomItem>;
-        rssItems = feeds
-            .map((e) => RssItemModel.fromAtomItem(e, id!, categoryId))
-            .toList();
+        rssItems =
+            feeds.map((e) => RssItemModel.fromAtomItem(e, this)).toList();
       } else if (isRss) {
         List<RssItem> feeds = items as List<RssItem>;
-        rssItems = feeds
-            .map((e) => RssItemModel.fromRssItem(e, id!, categoryId))
-            .toList();
+        rssItems = feeds.map((e) => RssItemModel.fromRssItem(e, this)).toList();
       }
     }
   }

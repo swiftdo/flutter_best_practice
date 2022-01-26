@@ -22,6 +22,8 @@ extension RssItemTableDataExt on RssItemTableData {
       isRead: isRead,
       cover: cover,
       category: category,
+      rssLogo: rssLogo,
+      rssName: rssName,
     );
   }
 }
@@ -65,6 +67,8 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
           content: element.content,
           pubDate: element.pubDate,
           cateId: element.cateId,
+          rssLogo: element.rssLogo,
+          rssName: element.rssName,
         );
         await update(rssItemTable).replace(res);
         return res.id;
@@ -88,6 +92,8 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
         cover: Value(item.cover),
         isRead: Value(item.isRead),
         isCached: Value(item.isCached),
+        rssName: Value(item.rssName),
+        rssLogo: Value(item.rssLogo),
       ),
     );
   }

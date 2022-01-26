@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/rss_index_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
+import 'package:flutter_best_practice/provider.dart';
+import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,7 +15,8 @@ class RssIndexPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(rssIndexProvider);
+    final state = ref.watch(rssReadProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,59 +32,34 @@ class RssIndexPage extends HookConsumerWidget {
       ),
       body: SmartRefresher(
         enablePullDown: true,
-        enablePullUp: state.hasMore,
         header: const WaterDropHeader(),
-        footer: state.hasMore
-            ? CustomFooter(
-                builder: (BuildContext context, LoadStatus? mode) {
-                  Widget body;
-                  if (mode == LoadStatus.idle) {
-                    body = const Text("pull up load");
-                  } else if (mode == LoadStatus.loading) {
-                    body = const CupertinoActivityIndicator();
-                  } else if (mode == LoadStatus.failed) {
-                    body = const Text("Load Failed!Click retry!");
-                  } else if (mode == LoadStatus.canLoading) {
-                    body = const Text("release to load more");
-                  } else {
-                    body = const Text("No more Data");
-                  }
-                  return Container(
-                    height: 55.0,
-                    alignment: Alignment.center,
-                    child: body,
-                  );
-                },
-              )
-            : null,
         controller: _refreshController,
         onRefresh: () {
-          ref.read(rssIndexProvider.notifier).onRefresh(_refreshController);
-        },
-        onLoading: () {
-          ref.read(rssIndexProvider.notifier).onLoading(_refreshController);
+          ref
+              .read(rssReadProvider.notifier)
+              .onRefresh(refreshController: _refreshController);
         },
         child: buildList(state, ref),
       ),
     );
   }
 
-  Widget buildList(RssIndexState state, WidgetRef ref) {
+  Widget buildList(RssReadState state, WidgetRef ref) {
+    final allItems = state.allRssItems;
+
     if (state.viewState == ViewState.empty) {
       return buildEmpty();
     }
-
     return ListView.builder(
       itemBuilder: (context, index) {
-        final rssItem = state.items[index];
+        final rssItem = allItems[index];
         return GestureDetector(
           onTap: () {
-            // rssItem.rssLogo = rss.logo;
-            // ref.read(gRouteProvider).push(
-            //   RssArticleRoute(
-            //     rssItem: rssItem,
-            //   ),
-            // );
+            ref.read(gRouteProvider).push(
+                  RssArticleRoute(
+                    rssItem: rssItem,
+                  ),
+                );
           },
           child: Container(
             clipBehavior: Clip.antiAlias,
@@ -139,12 +115,12 @@ class RssIndexPage extends HookConsumerWidget {
                                 CacheImage(
                                   margin: const EdgeInsets.only(right: 5),
                                   borderRadius: BorderRadius.circular(20),
-                                  imageUrl: "",
+                                  imageUrl: rssItem.rssLogo,
                                   width: 20,
                                   height: 20,
                                   fit: BoxFit.cover,
                                 ),
-                                Text(rssItem.author),
+                                Text(rssItem.rssName),
                               ],
                             ),
                             Row(
@@ -176,7 +152,7 @@ class RssIndexPage extends HookConsumerWidget {
           ),
         );
       },
-      itemCount: state.items.length,
+      itemCount: allItems.length,
     );
   }
 

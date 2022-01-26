@@ -47,7 +47,7 @@ class RssArticlePage extends HookConsumerWidget {
                 Row(
                   children: [
                     CacheImage(
-                      imageUrl: rssItem.rssLogo ?? '',
+                      imageUrl: rssItem.rssLogo,
                       width: 16,
                       height: 16,
                       fit: BoxFit.cover,

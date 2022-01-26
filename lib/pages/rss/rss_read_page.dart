@@ -16,14 +16,13 @@ import 'model/rss.dart';
 
 class RssReadPage extends HookConsumerWidget {
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: true);
+      RefreshController(initialRefresh: false);
 
   RssReadPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(rssReadProvider);
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -128,35 +127,13 @@ class RssReadPage extends HookConsumerWidget {
         Expanded(
             child: SmartRefresher(
           enablePullDown: true,
-          enablePullUp: state.hasMore,
+          enablePullUp: false,
           header: const WaterDropHeader(),
-          footer: CustomFooter(
-            builder: (BuildContext context, LoadStatus? mode) {
-              Widget body;
-              if (mode == LoadStatus.idle) {
-                body = const Text("pull up load");
-              } else if (mode == LoadStatus.loading) {
-                body = const CupertinoActivityIndicator();
-              } else if (mode == LoadStatus.failed) {
-                body = const Text("Load Failed!Click retry!");
-              } else if (mode == LoadStatus.canLoading) {
-                body = const Text("release to load more");
-              } else {
-                body = const Text("No more Data");
-              }
-              return Container(
-                height: 55.0,
-                alignment: Alignment.center,
-                child: body,
-              );
-            },
-          ),
           controller: _refreshController,
           onRefresh: () {
-            ref.read(rssReadProvider.notifier).onRefresh(_refreshController);
-          },
-          onLoading: () {
-            ref.read(rssReadProvider.notifier).onLoading(_refreshController);
+            ref
+                .read(rssReadProvider.notifier)
+                .onRefresh(refreshController: _refreshController);
           },
           child: buildList(state, ref),
         )),

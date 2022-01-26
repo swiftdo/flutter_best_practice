@@ -1,6 +1,7 @@
 import 'package:flutter_best_practice/core/date_util.dart';
 import 'package:flutter_best_practice/core/string_util.dart';
 import 'package:flutter_best_practice/core/timeline_util.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 import 'package:webfeed/domain/atom_item.dart';
 import 'package:webfeed/domain/rss_item.dart';
 
@@ -20,7 +21,8 @@ class RssItemModel {
   final bool isCached; // 是否已缓存
   final String showDesc; // 去除标签的desc
 
-  String? rssLogo; // 详情页要用
+  final String rssLogo; // 详情页要用
+  final String rssName;
 
   RssItemModel({
     this.id,
@@ -32,6 +34,8 @@ class RssItemModel {
     required this.author,
     required this.pubDate,
     required this.content,
+    required this.rssName,
+    required this.rssLogo,
     this.category,
     this.cover,
     this.isRead = false,
@@ -51,23 +55,25 @@ class RssItemModel {
     return dateTime?.millisecondsSinceEpoch ?? 0;
   }
 
-  static RssItemModel fromAtomItem(AtomItem item, int fid, int cateId) {
+  static RssItemModel fromAtomItem(AtomItem item, Rss rss) {
     final title = item.title ?? '';
     final desc = item.summary ?? title;
     final content = item.content ?? desc;
     return RssItemModel(
-      fid: fid,
-      cateId: cateId,
+      fid: rss.id!,
+      cateId: rss.categoryId,
       title: title,
       desc: desc,
       link: item.links?.first.href ?? '',
       author: item.authors?.first.name ?? '',
       pubDate: getPublishDateFrom(item.published),
       content: content,
+      rssLogo: rss.logo,
+      rssName: rss.name,
     );
   }
 
-  static RssItemModel fromRssItem(RssItem item, int fid, int cateId) {
+  static RssItemModel fromRssItem(RssItem item, Rss rss) {
     String? author = item.author;
     author ??= item.dc?.creator;
 
@@ -81,8 +87,8 @@ class RssItemModel {
     }
 
     return RssItemModel(
-      fid: fid,
-      cateId: cateId,
+      fid: rss.id!,
+      cateId: rss.categoryId,
       title: title,
       desc: desc,
       link: item.link ?? '',
@@ -90,6 +96,8 @@ class RssItemModel {
       pubDate: getPublishDateFrom(pubDate),
       content: content,
       cover: item.content?.images.first,
+      rssName: rss.name,
+      rssLogo: rss.logo,
     );
   }
 }

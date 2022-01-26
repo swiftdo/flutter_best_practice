@@ -535,6 +535,8 @@ class RssItemTableData extends DataClass
   final String? cover;
   final bool isRead;
   final bool isCached;
+  final String rssLogo;
+  final String rssName;
   RssItemTableData(
       {required this.id,
       required this.fid,
@@ -548,7 +550,9 @@ class RssItemTableData extends DataClass
       this.category,
       this.cover,
       required this.isRead,
-      required this.isCached});
+      required this.isCached,
+      required this.rssLogo,
+      required this.rssName});
   factory RssItemTableData.fromData(Map<String, dynamic> data,
       {String? prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -579,6 +583,10 @@ class RssItemTableData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}is_read'])!,
       isCached: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_cached'])!,
+      rssLogo: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}rss_logo'])!,
+      rssName: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}rss_name'])!,
     );
   }
   @override
@@ -601,6 +609,8 @@ class RssItemTableData extends DataClass
     }
     map['is_read'] = Variable<bool>(isRead);
     map['is_cached'] = Variable<bool>(isCached);
+    map['rss_logo'] = Variable<String>(rssLogo);
+    map['rss_name'] = Variable<String>(rssName);
     return map;
   }
 
@@ -622,6 +632,8 @@ class RssItemTableData extends DataClass
           cover == null && nullToAbsent ? const Value.absent() : Value(cover),
       isRead: Value(isRead),
       isCached: Value(isCached),
+      rssLogo: Value(rssLogo),
+      rssName: Value(rssName),
     );
   }
 
@@ -642,6 +654,8 @@ class RssItemTableData extends DataClass
       cover: serializer.fromJson<String?>(json['cover']),
       isRead: serializer.fromJson<bool>(json['isRead']),
       isCached: serializer.fromJson<bool>(json['isCached']),
+      rssLogo: serializer.fromJson<String>(json['rssLogo']),
+      rssName: serializer.fromJson<String>(json['rssName']),
     );
   }
   @override
@@ -661,6 +675,8 @@ class RssItemTableData extends DataClass
       'cover': serializer.toJson<String?>(cover),
       'isRead': serializer.toJson<bool>(isRead),
       'isCached': serializer.toJson<bool>(isCached),
+      'rssLogo': serializer.toJson<String>(rssLogo),
+      'rssName': serializer.toJson<String>(rssName),
     };
   }
 
@@ -677,7 +693,9 @@ class RssItemTableData extends DataClass
           String? category,
           String? cover,
           bool? isRead,
-          bool? isCached}) =>
+          bool? isCached,
+          String? rssLogo,
+          String? rssName}) =>
       RssItemTableData(
         id: id ?? this.id,
         fid: fid ?? this.fid,
@@ -692,6 +710,8 @@ class RssItemTableData extends DataClass
         cover: cover ?? this.cover,
         isRead: isRead ?? this.isRead,
         isCached: isCached ?? this.isCached,
+        rssLogo: rssLogo ?? this.rssLogo,
+        rssName: rssName ?? this.rssName,
       );
   @override
   String toString() {
@@ -708,14 +728,16 @@ class RssItemTableData extends DataClass
           ..write('category: $category, ')
           ..write('cover: $cover, ')
           ..write('isRead: $isRead, ')
-          ..write('isCached: $isCached')
+          ..write('isCached: $isCached, ')
+          ..write('rssLogo: $rssLogo, ')
+          ..write('rssName: $rssName')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => Object.hash(id, fid, cateId, title, desc, content, link,
-      author, pubDate, category, cover, isRead, isCached);
+      author, pubDate, category, cover, isRead, isCached, rssLogo, rssName);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -732,7 +754,9 @@ class RssItemTableData extends DataClass
           other.category == this.category &&
           other.cover == this.cover &&
           other.isRead == this.isRead &&
-          other.isCached == this.isCached);
+          other.isCached == this.isCached &&
+          other.rssLogo == this.rssLogo &&
+          other.rssName == this.rssName);
 }
 
 class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
@@ -749,6 +773,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
   final Value<String?> cover;
   final Value<bool> isRead;
   final Value<bool> isCached;
+  final Value<String> rssLogo;
+  final Value<String> rssName;
   const RssItemTableCompanion({
     this.id = const Value.absent(),
     this.fid = const Value.absent(),
@@ -763,6 +789,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     this.cover = const Value.absent(),
     this.isRead = const Value.absent(),
     this.isCached = const Value.absent(),
+    this.rssLogo = const Value.absent(),
+    this.rssName = const Value.absent(),
   });
   RssItemTableCompanion.insert({
     this.id = const Value.absent(),
@@ -778,6 +806,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     this.cover = const Value.absent(),
     this.isRead = const Value.absent(),
     this.isCached = const Value.absent(),
+    required String rssLogo,
+    required String rssName,
   })  : fid = Value(fid),
         cateId = Value(cateId),
         title = Value(title),
@@ -785,7 +815,9 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
         content = Value(content),
         link = Value(link),
         author = Value(author),
-        pubDate = Value(pubDate);
+        pubDate = Value(pubDate),
+        rssLogo = Value(rssLogo),
+        rssName = Value(rssName);
   static Insertable<RssItemTableData> custom({
     Expression<int>? id,
     Expression<int>? fid,
@@ -800,6 +832,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     Expression<String?>? cover,
     Expression<bool>? isRead,
     Expression<bool>? isCached,
+    Expression<String>? rssLogo,
+    Expression<String>? rssName,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -815,6 +849,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       if (cover != null) 'cover': cover,
       if (isRead != null) 'is_read': isRead,
       if (isCached != null) 'is_cached': isCached,
+      if (rssLogo != null) 'rss_logo': rssLogo,
+      if (rssName != null) 'rss_name': rssName,
     });
   }
 
@@ -831,7 +867,9 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       Value<String?>? category,
       Value<String?>? cover,
       Value<bool>? isRead,
-      Value<bool>? isCached}) {
+      Value<bool>? isCached,
+      Value<String>? rssLogo,
+      Value<String>? rssName}) {
     return RssItemTableCompanion(
       id: id ?? this.id,
       fid: fid ?? this.fid,
@@ -846,6 +884,8 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
       cover: cover ?? this.cover,
       isRead: isRead ?? this.isRead,
       isCached: isCached ?? this.isCached,
+      rssLogo: rssLogo ?? this.rssLogo,
+      rssName: rssName ?? this.rssName,
     );
   }
 
@@ -891,6 +931,12 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
     if (isCached.present) {
       map['is_cached'] = Variable<bool>(isCached.value);
     }
+    if (rssLogo.present) {
+      map['rss_logo'] = Variable<String>(rssLogo.value);
+    }
+    if (rssName.present) {
+      map['rss_name'] = Variable<String>(rssName.value);
+    }
     return map;
   }
 
@@ -909,7 +955,9 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
           ..write('category: $category, ')
           ..write('cover: $cover, ')
           ..write('isRead: $isRead, ')
-          ..write('isCached: $isCached')
+          ..write('isCached: $isCached, ')
+          ..write('rssLogo: $rssLogo, ')
+          ..write('rssName: $rssName')
           ..write(')'))
         .toString();
   }
@@ -993,6 +1041,16 @@ class $RssItemTableTable extends RssItemTable
       requiredDuringInsert: false,
       defaultConstraints: 'CHECK (is_cached IN (0, 1))',
       defaultValue: const Constant(false));
+  final VerificationMeta _rssLogoMeta = const VerificationMeta('rssLogo');
+  @override
+  late final GeneratedColumn<String?> rssLogo = GeneratedColumn<String?>(
+      'rss_logo', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _rssNameMeta = const VerificationMeta('rssName');
+  @override
+  late final GeneratedColumn<String?> rssName = GeneratedColumn<String?>(
+      'rss_name', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -1007,7 +1065,9 @@ class $RssItemTableTable extends RssItemTable
         category,
         cover,
         isRead,
-        isCached
+        isCached,
+        rssLogo,
+        rssName
       ];
   @override
   String get aliasedName => _alias ?? 'rss_item_table';
@@ -1084,6 +1144,18 @@ class $RssItemTableTable extends RssItemTable
     if (data.containsKey('is_cached')) {
       context.handle(_isCachedMeta,
           isCached.isAcceptableOrUnknown(data['is_cached']!, _isCachedMeta));
+    }
+    if (data.containsKey('rss_logo')) {
+      context.handle(_rssLogoMeta,
+          rssLogo.isAcceptableOrUnknown(data['rss_logo']!, _rssLogoMeta));
+    } else if (isInserting) {
+      context.missing(_rssLogoMeta);
+    }
+    if (data.containsKey('rss_name')) {
+      context.handle(_rssNameMeta,
+          rssName.isAcceptableOrUnknown(data['rss_name']!, _rssNameMeta));
+    } else if (isInserting) {
+      context.missing(_rssNameMeta);
     }
     return context;
   }

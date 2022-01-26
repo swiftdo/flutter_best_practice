@@ -81,7 +81,6 @@ class RssArticlesPage extends HookConsumerWidget {
             final rssItem = state.rss.rssItems[index];
             return GestureDetector(
               onTap: () {
-                rssItem.rssLogo = rss.logo;
                 ref.read(gRouteProvider).push(
                       RssArticleRoute(
                         rssItem: rssItem,

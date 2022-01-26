@@ -17,4 +17,6 @@ class RssItemTable extends Table {
       boolean().withDefault(const Constant(false))(); // 是否已读
   BoolColumn get isCached =>
       boolean().withDefault(const Constant(false))(); // 是否已缓存
+  TextColumn get rssLogo => text()();
+  TextColumn get rssName => text()();
 }
