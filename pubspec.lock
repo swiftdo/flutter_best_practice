@@ -376,7 +376,7 @@ packages:
     source: hosted
     version: "1.0.3"
   flutter_spinkit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_spinkit
       url: "https://pub.flutter-io.cn"
@@ -448,6 +448,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  group_list_view:
+    dependency: "direct main"
+    description:
+      name: group_list_view
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   hooks_riverpod:
     dependency: "direct main"
     description:

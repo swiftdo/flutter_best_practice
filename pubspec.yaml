@@ -54,6 +54,8 @@ dependencies:
   photo_view: ^0.13.0
   favicon: ^1.0.15
   logger: ^1.1.0
+  group_list_view: ^1.1.1
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:

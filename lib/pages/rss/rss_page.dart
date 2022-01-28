@@ -15,8 +15,8 @@ class RssPage extends HookConsumerWidget {
       routes: [
         RssIndexRoute(),
         RssReadRoute(),
-        const RssFindRoute(),
-        const RssConfigRoute(),
+        RssFindRoute(),
+        RssConfigRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavyBar(

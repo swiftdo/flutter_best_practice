@@ -25,6 +25,7 @@ class CacheImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
+      clipBehavior: borderRadius != null ? Clip.antiAlias : Clip.none,
       decoration: BoxDecoration(borderRadius: borderRadius),
       child: CachedNetworkImage(
         width: width,

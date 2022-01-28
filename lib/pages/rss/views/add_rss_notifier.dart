@@ -15,8 +15,8 @@ class AddRssState {
 
   AddRssState({this.url, required this.status, this.rss});
 
-  AddRssState.initial()
-      : url = null,
+  AddRssState.initial({String? feedUrl})
+      : url = feedUrl,
         rss = null,
         status = AddRssStatus.ideal;
 
@@ -35,11 +35,16 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   final RssDao rssDao;
   final RssItemDao rssItemDao;
 
-  AddRssNotifier(
-      {required this.repository,
-      required this.rssDao,
-      required this.rssItemDao})
-      : super(AddRssState.initial());
+  AddRssNotifier({
+    required this.repository,
+    required this.rssDao,
+    required this.rssItemDao,
+    String? feedUrl,
+  }) : super(AddRssState.initial(feedUrl: feedUrl)) {
+    if (feedUrl != null && feedUrl.isNotEmpty == true) {
+      fetch();
+    }
+  }
 
   set url(String url) {
     state = state.copyWith(url: url);
@@ -75,11 +80,14 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   }
 }
 
-final addRssProvider =
-    StateNotifierProvider.autoDispose<AddRssNotifier, AddRssState>((ref) {
+final addRssProvider = StateNotifierProvider.autoDispose
+    .family<AddRssNotifier, AddRssState, String?>((ref, feedUrl) {
   final repository = ref.watch(repositoryProvider);
   final rssDao = ref.watch(rssDaoProvider);
   final rssItemDao = ref.watch(rssItemDaoProvider);
   return AddRssNotifier(
-      repository: repository, rssDao: rssDao, rssItemDao: rssItemDao);
+      repository: repository,
+      rssDao: rssDao,
+      rssItemDao: rssItemDao,
+      feedUrl: feedUrl);
 });

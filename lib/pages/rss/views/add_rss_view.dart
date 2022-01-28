@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';
 
@@ -8,11 +9,13 @@ import 'add_rss_notifier.dart';
 import 'cache_image.dart';
 
 class AddRssView extends HookConsumerWidget {
-  const AddRssView({Key? key}) : super(key: key);
+  final String? feedUrl;
+
+  const AddRssView({Key? key, this.feedUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(addRssProvider);
+    final state = ref.watch(addRssProvider(feedUrl));
     final rss = state.rss;
 
     if (rss != null) {
@@ -100,7 +103,7 @@ class AddRssView extends HookConsumerWidget {
             onTap: () async {
               if (state.rss?.id == null) {
                 // 添加到数据库中
-                await ref.read(addRssProvider.notifier).addRss(rss);
+                await ref.read(addRssProvider(feedUrl).notifier).addRss(rss);
                 await ref.read(rssReadProvider.notifier).addRss(rss);
                 MyToast.showSuccess("添加成功");
               }
@@ -124,6 +127,17 @@ class AddRssView extends HookConsumerWidget {
         ],
       );
     } else {
+      if (feedUrl != null) {
+        return Container(
+          width: 100,
+          height: 100,
+          alignment: Alignment.center,
+          child: const SpinKitDoubleBounce(
+            color: Colors.grey,
+          ),
+        );
+      }
+
       return Column(
         children: <Widget>[
           SizedBox(
@@ -136,7 +150,7 @@ class AddRssView extends HookConsumerWidget {
               ),
               keyboardType: TextInputType.url,
               onChanged: (val) {
-                ref.read(addRssProvider.notifier).url = val;
+                ref.read(addRssProvider(feedUrl).notifier).url = val;
               },
             ),
           ),
@@ -175,7 +189,7 @@ class AddRssView extends HookConsumerWidget {
               ButtonState.success: Colors.black,
             },
             onPressed: () {
-              ref.read(addRssProvider.notifier).fetch();
+              ref.read(addRssProvider(feedUrl).notifier).fetch();
             },
             state: state.status.toButtonState(),
           ),

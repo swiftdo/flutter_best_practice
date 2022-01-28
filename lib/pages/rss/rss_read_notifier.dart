@@ -7,20 +7,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../provider.dart';
 import 'model/rss.dart';
-
-enum ViewState {
-  idle, //
-  busy,
-  empty,
-  error,
-}
+import 'model/view_state.dart';
 
 class RssReadState {
   final List<Rss> items;
 
   final List<Rss> selectItems; // 选中的items;
   final bool isEditMode; // 编辑状态
-
   final ViewState viewState;
 
   List<RssItemModel> get allRssItems {
@@ -28,9 +21,7 @@ class RssReadState {
     for (var rss in items) {
       res.addAll(rss.rssItems.map((e) => e));
     }
-
     res.sort((a, b) => b.pubDate.compareTo(a.pubDate));
-
     return res;
   }
 

@@ -8,6 +8,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'model/view_state.dart';
+
 class RssIndexPage extends HookConsumerWidget {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: true);

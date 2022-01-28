@@ -11,6 +11,8 @@ import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'model/view_state.dart';
+
 class RssReadPage extends HookConsumerWidget {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
