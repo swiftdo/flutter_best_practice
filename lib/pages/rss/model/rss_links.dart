@@ -1,4 +1,6 @@
-import 'package:flutter_best_practice/data/model/rss_source_model.dart';
+import 'package:flutter_best_practice/data/model/rss_sources_model.dart';
+import 'package:flutter_best_practice/data/repository/rss_repository.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final rssLinks = [
   {
@@ -6,13 +8,13 @@ final rssLinks = [
     "links": [
       {
         "name": "少数派",
-        "logo": "https://cdn.sspai.com/sspai/assets/img/favicon/icon.ico",
-        "url": "http://sspai.me/feed"
+        "url": "http://sspai.me/feed",
+        "logo": "",
       },
       {
         "name": "极客公园",
-        "logo": "http://feeds.geekpark.net",
-        "url": "http://feeds.geekpark.net"
+        "url": "http://feeds.geekpark.net",
+        "logo": "",
       },
       {
         "name": "TechCrunch中文版",
@@ -307,3 +309,26 @@ final rssLinks = [
     ]
   },
 ];
+
+class RssLinksFetch extends StateNotifier<List<RssSourcesModel>> {
+  final IRssRepository repository;
+
+  RssLinksFetch({required this.repository}) : super([]);
+
+  getLinksFavIcons() async {
+    List<RssSourcesModel> model =
+        rssLinks.map((e) => RssSourcesModel.fromJson(e)).toList();
+    final resFutures = model.map((element) async {
+      final futures = element.links.map((e) async {
+        final rss = await repository.getRss(e.url);
+        e = e.copyWith(logo: rss!.logo);
+        return e;
+      });
+      final res = await Future.wait(futures);
+      element = element.copyWith(links: res);
+      return element;
+    });
+    final result = await Future.wait(resFutures);
+    state = result;
+  }
+}

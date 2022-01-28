@@ -4,13 +4,13 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_category_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
-
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
-import 'table/rss_table.dart';
+import 'package:path_provider/path_provider.dart';
+
+import 'dao/rss_dao.dart';
 import 'table/rss_category_table.dart';
 import 'table/rss_item_table.dart';
-import 'dao/rss_dao.dart';
+import 'table/rss_table.dart';
 
 part 'rss_db.g.dart';
 

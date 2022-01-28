@@ -1,15 +1,10 @@
+import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:flutter_best_practice/provider.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:webfeed/domain/atom_feed.dart';
-import 'package:webfeed/domain/atom_item.dart';
-import 'package:webfeed/domain/rss_feed.dart';
-import 'package:webfeed/domain/rss_item.dart';
 
 enum AddRssStatus { ideal, loading, finished, error }
 
@@ -53,7 +48,7 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   fetch() async {
     final String? url = state.url?.trim();
     if (url == null || url.isEmpty) {
-      EasyLoading.showError("请填写 url");
+      MyToast.showError("请填写 url");
       return;
     }
     state = state.copyWithStatus(AddRssStatus.loading);
@@ -64,9 +59,10 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
       rss ??= await repository.getRss(url);
       state =
           state.copyWith(url: state.url!, status: AddRssStatus.error, rss: rss);
-    } catch (e) {
+    } catch (e, s) {
       state = state.copyWithStatus(AddRssStatus.ideal);
-      EasyLoading.showError("获取失败");
+      logger.e(error: e, stackTrace: s);
+      MyToast.showError("获取失败");
     }
   }
 

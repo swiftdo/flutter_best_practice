@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:favicon/favicon.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
@@ -36,34 +37,38 @@ class RssRepository implements IRssRepository {
   }
 
   // 从 link 中获取域名，拼接 https://coolshell.cn/favicon.ico
-  _getIcoLink(String url) {
-    Uri uri = Uri.parse(url);
-    return "${uri.scheme}://${uri.host}/favicon.ico";
+  Future<String> _getIcoLink(String url) async {
+    // Uri uri = Uri.parse(url);
+    // return "${uri.scheme}://${uri.host}/favicon.ico";
+    final icon = await Favicon.getBest(url);
+    return icon?.url ?? '';
   }
 
-  _rssFrom(dynamic feed, String url, String? type) {
+  Future<Rss?> _rssFrom(dynamic feed, String url, String? type) async {
     if (feed == null) {
       return null;
     }
-
     if (feed is RssFeed) {
+      final link = feed.link ?? url;
+      final logo = await _getIcoLink(link);
       return Rss(
-        url: feed.link ?? "",
+        url: link,
         name: feed.title ?? "",
         desc: feed.description ?? "",
-        logo: _getIcoLink(url),
+        logo: logo,
         type: type ?? "",
         categoryId: 0,
         feedUrl: url,
         items: feed.items,
       );
     } else if (feed is AtomFeed) {
-      final link = feed.links?.first.href ?? "";
+      final link = feed.links?.first.href ?? url;
+      final logo = await _getIcoLink(link);
       return Rss(
         url: link,
         name: feed.title ?? "",
         desc: feed.subtitle ?? '',
-        logo: _getIcoLink(url),
+        logo: logo,
         type: type ?? "",
         categoryId: 0,
         feedUrl: url,

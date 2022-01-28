@@ -52,6 +52,8 @@ dependencies:
   flutter_html: ^2.2.1
   url_launcher: ^6.0.18
   photo_view: ^0.13.0
+  favicon: ^1.0.15
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:

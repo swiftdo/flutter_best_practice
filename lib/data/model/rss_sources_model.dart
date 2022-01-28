@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'rss_source_model.dart';
+
 part 'rss_sources_model.freezed.dart';
 part 'rss_sources_model.g.dart';
 
