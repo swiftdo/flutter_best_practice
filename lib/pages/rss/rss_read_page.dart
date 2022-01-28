@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
+import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -221,22 +222,9 @@ class RssReadPage extends HookConsumerWidget {
     );
   }
 
-  Widget buildEmpty() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 100),
-            child: const Text("暂无订阅数据"),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildList(RssReadState state, WidgetRef ref) {
     if (state.viewState == ViewState.empty) {
-      return buildEmpty();
+      return const EmptyView();
     }
     return MasonryGridView.count(
       crossAxisCount: 2,

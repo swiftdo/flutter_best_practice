@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
+import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,7 +49,7 @@ class RssIndexPage extends HookConsumerWidget {
     final allItems = state.allRssItems;
 
     if (state.viewState == ViewState.empty) {
-      return buildEmpty();
+      return const EmptyView();
     }
     return ListView.builder(
       itemBuilder: (context, index) {
@@ -153,19 +154,6 @@ class RssIndexPage extends HookConsumerWidget {
         );
       },
       itemCount: allItems.length,
-    );
-  }
-
-  Widget buildEmpty() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 100),
-            child: const Text("暂无订阅数据"),
-          ),
-        ],
-      ),
     );
   }
 }
