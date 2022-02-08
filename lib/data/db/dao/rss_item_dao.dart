@@ -114,4 +114,26 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
   Future<int> deleteItemsFromRss(int fid) {
     return (delete(rssItemTable)..where((tbl) => tbl.fid.equals(fid))).go();
   }
+
+  /// 更新某个item
+  Future<int> updateRssItem(RssItemModel item) async {
+    return (update(rssItemTable)..where((tbl) => tbl.id.equals(item.id))).write(
+      RssItemTableCompanion(
+        fid: Value(item.fid),
+        cateId: Value(item.cateId),
+        title: Value(item.title),
+        desc: Value(item.desc),
+        content: Value(item.content),
+        link: Value(item.link),
+        author: Value(item.author),
+        pubDate: Value(item.pubDate),
+        category: Value(item.category),
+        cover: Value(item.cover),
+        isRead: Value(item.isRead),
+        isCached: Value(item.isCached),
+        rssName: Value(item.rssName),
+        rssLogo: Value(item.rssLogo),
+      ),
+    );
+  }
 }

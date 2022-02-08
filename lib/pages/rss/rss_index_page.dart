@@ -59,6 +59,7 @@ class RssIndexPage extends HookConsumerWidget {
         final rssItem = allItems[index];
         return GestureDetector(
           onTap: () {
+            ref.read(rssReadProvider.notifier).readRssItem(rssItem);
             ref.read(gRouteProvider).push(
                   RssArticleRoute(
                     rssItem: rssItem,
@@ -95,7 +96,13 @@ class RssIndexPage extends HookConsumerWidget {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: Text(rssItem.title),
+                        child: Text(
+                          rssItem.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: rssItem.isRead ? Colors.grey : Colors.black,
+                          ),
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_articles_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
 import 'package:flutter_best_practice/provider.dart';
@@ -97,6 +98,8 @@ class RssArticlesPage extends HookConsumerWidget {
         final rssItem = state.rss.rssItems[index];
         return GestureDetector(
           onTap: () {
+            ref.read(rssArticlesProvider(rss).notifier).readRssItem(rssItem);
+            ref.read(rssReadProvider.notifier).readRssItem(rssItem);
             ref.read(gRouteProvider).push(
                   RssArticleRoute(
                     rssItem: rssItem,
@@ -133,7 +136,13 @@ class RssArticlesPage extends HookConsumerWidget {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: Text(rssItem.title),
+                        child: Text(
+                          rssItem.title,
+                          style: TextStyle(
+                            color: rssItem.isRead ? Colors.grey : Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),

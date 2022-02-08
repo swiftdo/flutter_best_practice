@@ -1,6 +1,7 @@
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -30,6 +31,14 @@ class RssArticlesNotifier extends StateNotifier<RssArticlesState> {
     required this.rssRepository,
     required this.rssItemDao,
   }) : super(RssArticlesState.initial(rss));
+
+  readRssItem(RssItemModel item) {
+    final newItem = item.copy(isRead: true);
+    final rss = state.rss;
+    int itemIndex = rss.rssItems.indexWhere((element) => element.id == item.id);
+    rss.rssItems[itemIndex] = newItem;
+    state = state.copy(rss: rss);
+  }
 
   // 下拉刷新
   onRefresh(RefreshController controller) async {
