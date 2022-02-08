@@ -10,6 +10,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'model/view_state.dart';
 
+// rss 首页
 class RssIndexPage extends HookConsumerWidget {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: true);

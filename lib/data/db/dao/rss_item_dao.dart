@@ -103,7 +103,7 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
     final res = await (select(rssItemTable)
           ..where((tbl) => tbl.fid.equals(fid))
           ..orderBy([
-            (t) => OrderingTerm(expression: t.pubDate, mode: OrderingMode.asc)
+            (t) => OrderingTerm(expression: t.pubDate, mode: OrderingMode.desc)
           ]))
         .get();
 
