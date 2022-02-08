@@ -161,7 +161,8 @@ class RssArticlesPage extends HookConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
+                            Expanded(
+                                child: Row(
                               children: [
                                 CacheImage(
                                   margin: const EdgeInsets.only(right: 5),
@@ -171,9 +172,13 @@ class RssArticlesPage extends HookConsumerWidget {
                                   height: 20,
                                   fit: BoxFit.cover,
                                 ),
-                                Text(rssItem.author),
+                                Expanded(
+                                    child: Text(
+                                  rssItem.author,
+                                  overflow: TextOverflow.ellipsis,
+                                )),
                               ],
-                            ),
+                            )),
                             Row(
                               children: [
                                 Row(
