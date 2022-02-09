@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
@@ -6,10 +8,12 @@ import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:path/path.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'model/view_state.dart';
 
+// rss 首页
 class RssIndexPage extends HookConsumerWidget {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: true);
@@ -42,22 +46,25 @@ class RssIndexPage extends HookConsumerWidget {
               .read(rssReadProvider.notifier)
               .onRefresh(refreshController: _refreshController);
         },
-        child: buildList(state, ref),
+        child: buildList(state, ref, context),
       ),
     );
   }
 
-  Widget buildList(RssReadState state, WidgetRef ref) {
+  Widget buildList(RssReadState state, WidgetRef ref, BuildContext context) {
     final allItems = state.allRssItems;
 
     if (state.viewState == ViewState.empty) {
       return const EmptyView();
     }
     return ListView.builder(
+      padding: EdgeInsets.only(
+          bottom: max(MediaQuery.of(context).padding.bottom, 10)),
       itemBuilder: (context, index) {
         final rssItem = allItems[index];
         return GestureDetector(
           onTap: () {
+            ref.read(rssReadProvider.notifier).readRssItem(rssItem);
             ref.read(gRouteProvider).push(
                   RssArticleRoute(
                     rssItem: rssItem,
@@ -94,7 +101,13 @@ class RssIndexPage extends HookConsumerWidget {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(top: 10),
-                        child: Text(rssItem.title),
+                        child: Text(
+                          rssItem.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: rssItem.isRead ? Colors.grey : Colors.black,
+                          ),
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 10),

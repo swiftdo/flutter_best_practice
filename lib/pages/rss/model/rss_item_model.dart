@@ -47,6 +47,41 @@ class RssItemModel {
     return TimelineUtil.formatByDateTime(dateTime!);
   }
 
+  RssItemModel copy({
+    int? fid,
+    int? cateId,
+    String? title,
+    String? desc,
+    String? link,
+    String? author,
+    int? pubDate,
+    String? content,
+    String? rssLogo,
+    String? rssName,
+    String? category,
+    String? cover,
+    bool? isRead,
+    bool? isCached,
+  }) {
+    return RssItemModel(
+      id: id,
+      fid: fid ?? this.fid,
+      cateId: cateId ?? this.cateId,
+      title: title ?? this.title,
+      desc: desc ?? this.desc,
+      link: link ?? this.link,
+      author: author ?? this.author,
+      pubDate: pubDate ?? this.pubDate,
+      content: content ?? this.content,
+      rssLogo: rssLogo ?? this.rssLogo,
+      rssName: rssName ?? this.rssName,
+      category: category ?? this.category,
+      cover: cover ?? this.cover,
+      isRead: isRead ?? this.isRead,
+      isCached: isCached ?? this.isCached,
+    );
+  }
+
   static int getPublishDateFrom(String? dateStr) {
     if (dateStr == null) {
       return 0;

@@ -3,6 +3,7 @@ import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../provider.dart';
@@ -61,6 +62,18 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   }) : super(
           RssReadState.initial([]),
         );
+
+  /// 文章已读
+  readRssItem(RssItemModel item) async {
+    final newItem = item.copy(isRead: true);
+    final res = await rssItemDao.updateRssItem(newItem);
+    List<Rss> items = List.from(state.items);
+    int rssIndex = items.indexWhere((element) => element.id == item.fid);
+    final rss = items[rssIndex];
+    int itemIndex = rss.rssItems.indexWhere((element) => element.id == item.id);
+    rss.rssItems[itemIndex] = newItem;
+    state = state.copy(items: items);
+  }
 
   addRss(Rss rss) {
     state = state.copy(items: [rss, ...state.items]);
