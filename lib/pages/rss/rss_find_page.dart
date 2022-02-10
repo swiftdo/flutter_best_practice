@@ -25,7 +25,10 @@ class RssFindPage extends HookConsumerWidget {
         elevation: 0,
         title: const Text(
           "发现",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 28,
+          ),
         ),
         centerTitle: false,
       ),

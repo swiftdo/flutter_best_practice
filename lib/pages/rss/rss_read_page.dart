@@ -31,6 +31,7 @@ class RssReadPage extends HookConsumerWidget {
           "订阅",
           style: TextStyle(
             color: Colors.black,
+            fontSize: 28,
           ),
         ),
         elevation: 0,

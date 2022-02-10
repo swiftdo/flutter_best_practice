@@ -25,23 +25,23 @@ class RssPage extends HookConsumerWidget {
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
                 activeColor: Colors.black,
-                title: Text('首页'),
-                icon: Icon(Icons.home),
+                title: const Text('首页'),
+                icon: const Icon(Icons.home),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
                 activeColor: Colors.black,
-                title: Text('订阅'),
-                icon: Icon(Icons.apps),
+                title: const Text('订阅'),
+                icon: const Icon(Icons.apps),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
                 activeColor: Colors.black,
-                title: Text('发现'),
-                icon: Icon(Icons.find_in_page_outlined),
+                title: const Text('发现'),
+                icon: const Icon(Icons.find_in_page_outlined),
                 textAlign: TextAlign.center),
             BottomNavyBarItem(
                 activeColor: Colors.black,
-                title: Text('我的'),
-                icon: Icon(Icons.person),
+                title: const Text('设置'),
+                icon: const Icon(Icons.settings),
                 textAlign: TextAlign.center),
           ],
         );
