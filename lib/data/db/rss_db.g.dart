@@ -348,9 +348,10 @@ class RssTableCompanion extends UpdateCompanion<RssTableData> {
 
 class $RssTableTable extends RssTable
     with TableInfo<$RssTableTable, RssTableData> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $RssTableTable(this._db, [this._alias]);
+  $RssTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -516,7 +517,7 @@ class $RssTableTable extends RssTable
 
   @override
   $RssTableTable createAlias(String alias) {
-    return $RssTableTable(_db, alias);
+    return $RssTableTable(attachedDatabase, alias);
   }
 }
 
@@ -965,9 +966,10 @@ class RssItemTableCompanion extends UpdateCompanion<RssItemTableData> {
 
 class $RssItemTableTable extends RssItemTable
     with TableInfo<$RssItemTableTable, RssItemTableData> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $RssItemTableTable(this._db, [this._alias]);
+  $RssItemTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -1170,7 +1172,7 @@ class $RssItemTableTable extends RssItemTable
 
   @override
   $RssItemTableTable createAlias(String alias) {
-    return $RssItemTableTable(_db, alias);
+    return $RssItemTableTable(attachedDatabase, alias);
   }
 }
 
@@ -1297,9 +1299,10 @@ class RssCategoryTableCompanion extends UpdateCompanion<RssCategoryTableData> {
 
 class $RssCategoryTableTable extends RssCategoryTable
     with TableInfo<$RssCategoryTableTable, RssCategoryTableData> {
-  final GeneratedDatabase _db;
+  @override
+  final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $RssCategoryTableTable(this._db, [this._alias]);
+  $RssCategoryTableTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
@@ -1346,7 +1349,7 @@ class $RssCategoryTableTable extends RssCategoryTable
 
   @override
   $RssCategoryTableTable createAlias(String alias) {
-    return $RssCategoryTableTable(_db, alias);
+    return $RssCategoryTableTable(attachedDatabase, alias);
   }
 }
 
