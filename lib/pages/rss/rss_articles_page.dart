@@ -176,6 +176,7 @@ class RssArticlesPage extends HookConsumerWidget {
                                     child: Text(
                                   rssItem.author,
                                   overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(fontSize: 12),
                                 )),
                               ],
                             )),

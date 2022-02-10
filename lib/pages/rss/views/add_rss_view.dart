@@ -34,7 +34,10 @@ class AddRssView extends HookConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("URL"),
+                const Text(
+                  "URL",
+                  style: TextStyle(fontSize: 14),
+                ),
                 Expanded(
                     child: Container(
                   margin: const EdgeInsets.only(left: 10),
@@ -42,8 +45,9 @@ class AddRssView extends HookConsumerWidget {
                     rss.url,
                     style: const TextStyle(
                       color: Colors.black54,
-                      fontSize: 12,
+                      fontSize: 14,
                     ),
+                    textAlign: TextAlign.end,
                   ),
                 )),
               ],
@@ -54,11 +58,20 @@ class AddRssView extends HookConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("名称"),
-                Text(
-                  rss.name,
-                  style: const TextStyle(color: Colors.black54),
+                const Text(
+                  "名称",
+                  style: TextStyle(fontSize: 14),
                 ),
+                Expanded(
+                  child: Text(
+                    rss.name,
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                )
               ],
             ),
           ),
@@ -68,12 +81,18 @@ class AddRssView extends HookConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("分类"),
+                  const Text(
+                    "分类",
+                    style: TextStyle(fontSize: 14),
+                  ),
                   Row(
                     children: const [
                       Text(
                         "无分类",
-                        style: TextStyle(color: Colors.black54),
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                        ),
                       ),
                       Icon(Icons.arrow_right)
                     ],
@@ -87,13 +106,20 @@ class AddRssView extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("简介"),
+                const Text(
+                  "简介",
+                  style: TextStyle(fontSize: 14),
+                ),
                 Expanded(
                     child: Container(
                   margin: const EdgeInsets.only(left: 10),
                   child: Text(
                     rss.desc,
-                    style: const TextStyle(color: Colors.black54),
+                    style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                    ),
+                    textAlign: TextAlign.end,
                   ),
                 )),
               ],
@@ -120,6 +146,7 @@ class AddRssView extends HookConsumerWidget {
                 rss.id == null ? '订阅' : '已订阅',
                 style: const TextStyle(
                   color: Colors.white,
+                  fontSize: 16,
                 ),
               ),
             ),

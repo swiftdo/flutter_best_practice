@@ -136,7 +136,12 @@ class RssIndexPage extends HookConsumerWidget {
                                   height: 20,
                                   fit: BoxFit.cover,
                                 ),
-                                Text(rssItem.rssName),
+                                Text(
+                                  rssItem.rssName,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                             Row(
