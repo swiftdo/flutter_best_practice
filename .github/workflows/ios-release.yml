@@ -13,7 +13,7 @@ jobs:
       SHEME: Runner
       BUILD_CONFIGURATION: Release
       TEAM_ID: 64H5U3LG67
-      PROVISIONING_PROFILE: a7944ea9-ae1b-460a-b567-e8efe7415a50
+      PROVISIONING_PROFILE: 471e1388-37bb-4b51-a69c-e555ec425b51
       CODE_SIGN_IDENTITY: "Apple Distribution: JiHua Lai (64H5U3LG67)"
 
     steps:
