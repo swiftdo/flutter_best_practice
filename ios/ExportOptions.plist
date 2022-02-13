@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>method</key>
+        <string>ad-hoc</string>
+        <key>teamID</key>
+        <string>64H5U3LG67</string>
+        <key>signingStyle</key>
+        <string>manual</string>
+        <key>provisioningProfiles</key>
+        <dict>
+            <key>run.oldbird.hellorss</key>
+            <string>471e1388-37bb-4b51-a69c-e555ec425b51</string>
+        </dict>
+    </dict>
+</plist>
