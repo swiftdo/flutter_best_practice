@@ -1,5 +1,13 @@
 # flutter_best_practice
 
+## 下载地址
+
+蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
+
+
+
+## 代码生成
+
 ```shell
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 fvm flutter pub run build_runner watch --delete-conflicting-outputs
