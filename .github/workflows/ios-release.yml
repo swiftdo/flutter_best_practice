@@ -74,7 +74,7 @@ jobs:
         uses: xtayga/upload-pgyer-action@master
         with:
             url: https://www.pgyer.com/apiv2/app/upload
-            forms: '{"_api_key":"${{ env.PGY_KEY }}","buildName":"RSS"}'
+            forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
             fileForms: '{"file":"build-output/ios/flutter_best_practice.ipa"}' # ipa 的名字为 info.plist 中的 CFBundleName
 
       - name: Publish iOS Artefacts
