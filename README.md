@@ -4,19 +4,11 @@
 
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
 
-
-
 ## 代码生成
 
 ```shell
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 fvm flutter pub run build_runner watch --delete-conflicting-outputs
-```
-
-```shell
-https://coolshell.cn/feed
-http://www.ruanyifeng.com/blog/atom.xml
-http://www.raychase.net/feed
 ```
 
 ## Rss 知识点
@@ -32,6 +24,22 @@ http://www.raychase.net/feed
 RSS 更高效地获取信息，不在多个应用间来回切换，另一方面拒绝算法给我们推荐的内容，只看主动订阅的内容
 
 RSS 可能是抵御算法推荐的最后一方净土
+
+## 单元测试
+
+1、将 test 或者 flutter_test 加入依赖；
+
+2、创建测试文件；
+
+3、创建一个要测试的类；
+
+4、为创建的类写一个测试；
+
+5、整合多个测试到一个 group；
+
+6、执行测试。
+
+关于单元测试的更多内容，可移步至 [单元测试](https://flutter.cn/docs/cookbook/testing/unit/introduction) 的文档。
 
 ### 参考：
 
