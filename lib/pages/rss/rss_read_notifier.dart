@@ -124,9 +124,8 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   onRefresh({RefreshController? refreshController}) async {
     state = state.copy(viewState: ViewState.busy);
     try {
-      final res = await rssDao.getAllRssList(
-        rssItemDao: rssItemDao,
-      );
+      /// 从缓存中获取
+      final res = await rssDao.getAllRssList(rssItemDao: rssItemDao);
       refreshController?.refreshCompleted();
       if (res.isEmpty) {
         state = state.copy(
@@ -148,7 +147,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
 }
 
 final rssReadProvider =
-    StateNotifierProvider.autoDispose<RssReadNotifier, RssReadState>((ref) {
+    StateNotifierProvider<RssReadNotifier, RssReadState>((ref) {
   final rssDao = ref.watch(rssDaoProvider);
   final rssItemDao = ref.watch(rssItemDaoProvider);
   return RssReadNotifier(rssDao: rssDao, rssItemDao: rssItemDao);

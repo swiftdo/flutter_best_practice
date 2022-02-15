@@ -1,3 +1,4 @@
+import 'package:flutter_best_practice/data/db/dao/rss_category_dao.dart';
 import 'package:flutter_best_practice/data/db/rss_db.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,6 +26,11 @@ final rssDaoProvider = Provider((ref) {
 final rssItemDaoProvider = Provider((ref) {
   final db = ref.watch(gDb);
   return RssItemDao(db);
+});
+
+final rssCateDaoProvider = Provider((ref) {
+  final db = ref.watch(gDb);
+  return RssCategoryDao(db);
 });
 
 final repositoryProvider = Provider.autoDispose<IRssRepository>((ref) {

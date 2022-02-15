@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/pages/rss/rss_cates_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
@@ -7,10 +8,12 @@ import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import 'model/rss.dart';
 import 'model/view_state.dart';
 
 /// 源头
@@ -23,6 +26,8 @@ class RssReadPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(rssReadProvider);
+    final cateState = ref.watch(rssCatesProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -39,13 +44,14 @@ class RssReadPage extends HookConsumerWidget {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-              onPressed: () {
-                addRss(context);
-              },
-              icon: const Icon(
-                Icons.add_circle,
-                color: Colors.black,
-              ))
+            onPressed: () {
+              addRss(context);
+            },
+            icon: const Icon(
+              Icons.add_circle,
+              color: Colors.black,
+            ),
+          )
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
@@ -56,41 +62,49 @@ class RssReadPage extends HookConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(4),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 2,
-                        color: Colors.black12,
-                        offset: Offset.zero,
-                      )
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "全部类型",
-                        style: TextStyle(
-                          fontSize: 14,
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    _pickCate(context);
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 2,
+                          color: Colors.black12,
+                          offset: Offset.zero,
+                        )
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          cateState.selectCate.name,
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        width: 1,
-                        height: 10,
-                        color: Colors.black,
-                      ),
-                      const Icon(
-                        Icons.dashboard_outlined,
-                        color: Colors.black,
-                        size: 16,
-                      )
-                    ],
+                        Container(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
+                          width: 1,
+                          height: 10,
+                          color: Colors.black,
+                        ),
+                        const Icon(
+                          Icons.dashboard_outlined,
+                          color: Colors.black,
+                          size: 16,
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -118,34 +132,144 @@ class RssReadPage extends HookConsumerWidget {
           ),
         ),
       ),
-      body: _buildBody(state, ref),
+      body: _buildBody(state, cateState, ref),
     );
   }
 
-  Widget _buildBody(RssReadState state, WidgetRef ref) {
+  _pickCate(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      //自定义底部弹窗布局
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.0),
+          topRight: Radius.circular(20.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return HookConsumer(
+          builder: (context, ref, child) {
+            final state = ref.watch(rssCatesProvider);
+            const double plr = 16;
+            const double itemS = 20;
+            final itemW =
+                (MediaQuery.of(context).size.width - 2 * plr - itemS) / 2;
+
+            return Container(
+              padding: const EdgeInsets.only(top: 10, left: plr, right: plr),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      children: [
+                        const Text(
+                          "分类",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        IconButton(
+                          iconSize: 20,
+                          padding: const EdgeInsets.all(2),
+                          splashRadius: 16,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+
+                            /// 跳转到
+                            ref
+                                .read(gRouteProvider)
+                                .push(const RssCatesRoute());
+                          },
+                          icon: const Icon(
+                            Icons.settings,
+                            size: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: Wrap(
+                        runSpacing: itemS,
+                        spacing: itemS,
+                        children: state.optionItems
+                            .map(
+                              (e) => GestureDetector(
+                                onTap: () {
+                                  if (state.selectCateId == e.id) {
+                                    return;
+                                  }
+                                  ref
+                                      .read(rssCatesProvider.notifier)
+                                      .selectCate(e);
+                                  Navigator.of(context).pop();
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(width: 1),
+                                    color: state.selectCateId == e.id
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                  width: itemW,
+                                  height: 36,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    e.name,
+                                    style: TextStyle(
+                                      color: state.selectCateId == e.id
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(RssReadState state, RssCateState cateState, WidgetRef ref) {
     return Column(
       children: [
         Expanded(
-            child: SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: false,
-          header: const WaterDropHeader(),
-          controller: _refreshController,
-          onRefresh: () {
-            ref
-                .read(rssReadProvider.notifier)
-                .onRefresh(refreshController: _refreshController);
-          },
-          child: buildList(state, ref),
-        )),
+          child: SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: false,
+            header: const WaterDropHeader(),
+            controller: _refreshController,
+            onRefresh: () {
+              ref
+                  .read(rssReadProvider.notifier)
+                  .onRefresh(refreshController: _refreshController);
+            },
+            child: buildList(state, cateState, ref),
+          ),
+        ),
         if (state.isEditMode)
           Container(
             decoration: const BoxDecoration(
-                border: Border(
-                    top: BorderSide(
-              color: Colors.black12,
-              width: 0.5,
-            ))),
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black12,
+                  width: 0.5,
+                ),
+              ),
+            ),
             padding: const EdgeInsets.only(right: 16),
             height: 50,
             child: Row(
@@ -226,27 +350,36 @@ class RssReadPage extends HookConsumerWidget {
     );
   }
 
-  Widget buildList(RssReadState state, WidgetRef ref) {
+  Widget buildList(RssReadState state, RssCateState cateState, WidgetRef ref) {
     if (state.viewState == ViewState.empty) {
       return const EmptyView();
     }
+
+    List<Rss> showRssList = [];
+    if (cateState.selectCate.isAll) {
+      showRssList = state.items;
+    } else {
+      showRssList = state.items
+          .where((element) => element.categoryId == cateState.selectCate.id)
+          .toList();
+    }
+
     return MasonryGridView.count(
       crossAxisCount: 2,
       mainAxisSpacing: 16,
       crossAxisSpacing: 16,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemBuilder: (context, index) {
-        return _buildItemCell(state, index, ref);
+        return _buildItemCell(state, showRssList[index], ref);
       },
-      itemCount: state.items.length,
+      itemCount: showRssList.length,
     );
   }
 
-  Widget _buildItemCell(RssReadState state, int index, WidgetRef ref) {
-    final item = state.items[index];
+  Widget _buildItemCell(RssReadState state, Rss rss, WidgetRef ref) {
     final cell = GestureDetector(
       onTap: () {
-        ref.read(gRouteProvider).push(RssArticlesRoute(rss: item));
+        ref.read(gRouteProvider).push(RssArticlesRoute(rss: rss));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -267,13 +400,13 @@ class RssReadPage extends HookConsumerWidget {
             CacheImage(
               width: 40,
               height: 40,
-              imageUrl: item.logo,
+              imageUrl: rss.logo,
               fit: BoxFit.cover,
             ),
             Container(
               margin: const EdgeInsets.only(top: 5),
               child: Text(
-                item.name,
+                rss.name,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
@@ -283,7 +416,7 @@ class RssReadPage extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.only(top: 5),
               child: Text(
-                item.desc,
+                rss.desc,
                 maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
@@ -308,11 +441,11 @@ class RssReadPage extends HookConsumerWidget {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                ref.read(rssReadProvider.notifier).checkRss(item);
+                ref.read(rssReadProvider.notifier).checkRss(rss);
               },
               child: Container(
                 padding: const EdgeInsets.only(top: 5, right: 5),
-                child: Icon(state.selectItems.contains(item)
+                child: Icon(state.selectItems.contains(rss)
                     ? Icons.check_circle
                     : Icons.radio_button_unchecked_outlined),
               ),
