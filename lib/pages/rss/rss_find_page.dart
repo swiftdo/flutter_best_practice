@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/rss_source_add_view.dart';
+import 'package:flutter_best_practice/provider.dart';
+import 'package:flutter_best_practice/router/route.gr.dart';
 import 'rss_find_notifier.dart';
 import 'views/page_common_views.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -82,25 +85,42 @@ class RssFindPage extends HookConsumerWidget {
           child: Row(
             children: [
               Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    final rssList = ref.read(rssReadProvider).items;
+                    final index = rssList
+                        .indexWhere((element) => element.feedUrl == item.url);
+                    // 如果存在则跳转到 rss 文章列表
+                    if (index >= 0) {
+                      ref
+                          .read(gRouteProvider)
+                          .push(RssArticlesRoute(rss: rssList[index]));
+                    } else {
+                      // 跳转不一样的
+                    }
+                  },
                   child: Row(
-                children: [
-                  CacheImage(
-                    imageUrl: item.logo,
-                    width: 30,
-                    height: 30,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 10, right: 10),
-                      child: Text(
-                        item.name,
-                        overflow: TextOverflow.ellipsis,
+                    children: [
+                      CacheImage(
+                        imageUrl: item.logo,
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.cover,
+                        borderRadius: BorderRadius.circular(3),
                       ),
-                    ),
-                  )
-                ],
-              )),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 10, right: 10),
+                          child: Text(
+                            item.name,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               RssSourceAddView(
                 item: item,
               ),

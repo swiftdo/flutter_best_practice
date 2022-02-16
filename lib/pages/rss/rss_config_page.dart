@@ -31,19 +31,22 @@ class RssConfigPage extends HookConsumerWidget {
     return GroupListView(
       itemBuilder: (context, IndexPath index) {
         final item = state.sections[index.section].rows[index.index];
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              Icon(
-                item.icon,
-                size: 18,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 3),
-                child: Text(item.title),
-              ),
-            ],
+        return GestureDetector(
+          onTap: () => item.onTap?.call(ref),
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Icon(
+                  item.icon,
+                  size: 18,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 3),
+                  child: Text(item.title),
+                ),
+              ],
+            ),
           ),
         );
       },

@@ -31,11 +31,12 @@ class RssConfigNotifier extends StateNotifier<RssConfigState> {
       : super(RssConfigState.initial([
           ConfigSection(name: "应用管理", rows: [
             ConfigRow(
-                icon: Icons.folder,
-                title: "分类管理",
-                onTap: (ref) {
-                  ref.read(gRouteProvider).push(const RssCatesRoute());
-                }),
+              icon: Icons.folder,
+              title: "分类管理",
+              onTap: (ref) {
+                ref.read(gRouteProvider).push(const RssCatesRoute());
+              },
+            ),
             ConfigRow(icon: Icons.favorite, title: "我的收藏"),
             ConfigRow(icon: Icons.history, title: "浏览历史"),
           ]),
