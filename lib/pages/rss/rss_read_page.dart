@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_cates_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
+import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
 import 'package:flutter_best_practice/provider.dart';
@@ -30,18 +31,8 @@ class RssReadPage extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "订阅",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28,
-          ),
-        ),
-        elevation: 0,
-        centerTitle: false,
-        backgroundColor: Colors.white,
+      appBar: AppBarExt.leftTitle(
+        "订阅",
         actions: [
           IconButton(
             onPressed: () {

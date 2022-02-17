@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/rss_source_add_view.dart';
 import 'package:flutter_best_practice/provider.dart';
@@ -23,18 +24,7 @@ class RssFindPage extends HookConsumerWidget {
     final state = ref.watch(rssFindProvider);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "发现",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28,
-          ),
-        ),
-        centerTitle: false,
-      ),
+      appBar: AppBarExt.leftTitle("发现"),
       body: SmartRefresher(
         enablePullDown: true,
         header: const WaterDropHeader(),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_articles_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
 import 'package:flutter_best_practice/provider.dart';
@@ -28,24 +29,7 @@ class RssArticlesPage extends HookConsumerWidget {
     final state = ref.watch(rssArticlesProvider(rss));
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            ref.read(gRouteProvider).pop();
-          },
-          icon: const Icon(
-            LineIcons.angleLeft,
-            color: Colors.black,
-          ),
-        ),
-        title: Text(
-          rss.name,
-          style: const TextStyle(color: Colors.black),
-        ),
-      ),
+      appBar: AppBarExt.backTitle(rss.name),
       body: SmartRefresher(
         enablePullDown: true,
         enablePullUp: false,

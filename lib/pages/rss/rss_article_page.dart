@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
@@ -21,24 +22,7 @@ class RssArticlePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () {
-            ref.read(gRouteProvider).pop();
-          },
-          icon: const Icon(
-            LineIcons.angleLeft,
-            color: Colors.black,
-          ),
-        ),
-        title: const Text(
-          "文章详情",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
+      appBar: AppBarExt.backTitle("文章详情"),
       body: SingleChildScrollView(
         controller: controller,
         padding: EdgeInsets.only(

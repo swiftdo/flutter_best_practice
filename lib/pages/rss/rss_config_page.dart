@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/pages/rss/rss_config_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:group_list_view/group_list_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,18 +11,7 @@ class RssConfigPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        centerTitle: false,
-        title: const Text(
-          '设置',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 28,
-          ),
-        ),
-      ),
+      appBar: AppBarExt.leftTitle('设置'),
       body: _buildBody(ref),
     );
   }
