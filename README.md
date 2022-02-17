@@ -4,6 +4,19 @@
 
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
 
+## 规划
+
+* [x] rss 添加
+* [x] rss 文章列表
+* [x] rss 删除
+* [x] rss 文章详情
+* [x] rss 分类管理
+* [ ] 收藏
+* [ ] 历史
+* [ ] OPML 导入和导出
+* [ ] 应用分享
+* [ ] 应用评价
+
 ## 代码生成
 
 ```shell
