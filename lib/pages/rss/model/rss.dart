@@ -37,6 +37,38 @@ class Rss {
     this.items,
   });
 
+  Rss copy({
+    int? id,
+    String? url,
+    String? name,
+    String? desc,
+    int? categoryId,
+    String? logo,
+    String? type,
+    bool? readOrigin,
+    bool? openPush,
+    bool? grabOrigin,
+    String? feedUrl,
+    dynamic items,
+    List<RssItemModel>? rssItems,
+  }) {
+    return Rss(
+      id: id ?? this.id,
+      url: url ?? this.url,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      categoryId: categoryId ?? this.categoryId,
+      logo: logo ?? this.logo,
+      type: type ?? this.type,
+      readOrigin: readOrigin ?? this.readOrigin,
+      openPush: openPush ?? this.openPush,
+      grabOrigin: grabOrigin ?? this.grabOrigin,
+      feedUrl: feedUrl ?? this.feedUrl,
+      items: items ?? this.items,
+      rssItems: rssItems ?? this.rssItems,
+    );
+  }
+
   refreshRssItems() async {
     if (items != null) {
       if (isAtom) {

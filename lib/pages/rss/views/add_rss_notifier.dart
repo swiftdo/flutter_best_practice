@@ -3,6 +3,7 @@ import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -12,21 +13,30 @@ class AddRssState {
   final String? url;
   final AddRssStatus status;
   final Rss? rss;
+  final RssCategory cate;
 
-  AddRssState({this.url, required this.status, this.rss});
+  AddRssState({this.url, required this.status, this.rss, required this.cate});
 
   AddRssState.initial({String? feedUrl})
       : url = feedUrl,
         rss = null,
+        cate = RssCategory.none(),
         status = AddRssStatus.ideal;
 
-  AddRssState copyWith({required String url, AddRssStatus? status, Rss? rss}) {
+  AddRssState copyWith(
+      {required String url,
+      AddRssStatus? status,
+      Rss? rss,
+      RssCategory? cate}) {
     return AddRssState(
-        url: url, status: status ?? this.status, rss: rss ?? this.rss);
+        url: url,
+        status: status ?? this.status,
+        rss: rss ?? this.rss,
+        cate: cate ?? this.cate);
   }
 
   AddRssState copyWithStatus(AddRssStatus status) {
-    return AddRssState(status: status, url: url, rss: rss);
+    return AddRssState(status: status, url: url, rss: rss, cate: cate);
   }
 }
 
@@ -69,6 +79,11 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
       logger.e(error: e, stackTrace: s);
       MyToast.showError("获取失败");
     }
+  }
+
+  selectCate(RssCategory cate) {
+    final rss = state.rss?.copy(categoryId: cate.id);
+    state = state.copyWith(url: state.url!, cate: cate, rss: rss);
   }
 
   /// 添加rss

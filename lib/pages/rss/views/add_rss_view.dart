@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/rss/views/rss_cate_select_view.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'add_rss_notifier.dart';
 import 'cache_image.dart';
@@ -75,29 +77,48 @@ class AddRssView extends HookConsumerWidget {
               ],
             ),
           ),
+
+          /// 已经获取到rss 了
           if (rss.id == null)
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "分类",
-                    style: TextStyle(fontSize: 14),
+            GestureDetector(
+              onTap: () {
+                /// 弹窗，分类选择
+                Alert(
+                  context: context,
+                  title: "选择新分类",
+                  content: RssCateSelectView(
+                    onSelect: (cate) {
+                      ref
+                          .read(addRssProvider(feedUrl).notifier)
+                          .selectCate(cate);
+                    },
                   ),
-                  Row(
-                    children: const [
-                      Text(
-                        "无分类",
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 14,
+                  buttons: [],
+                ).show();
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "分类",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          state.cate.name,
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                      Icon(Icons.arrow_right)
-                    ],
-                  ),
-                ],
+                        const Icon(Icons.arrow_right)
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           Container(
