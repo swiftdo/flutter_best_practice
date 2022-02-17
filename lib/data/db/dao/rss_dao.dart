@@ -3,6 +3,7 @@ import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/db/rss_db.dart';
 import 'package:flutter_best_practice/data/db/table/rss_table.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 
 part 'rss_dao.g.dart';
@@ -107,6 +108,17 @@ class RssDao extends DatabaseAccessor<RssDatabase> with _$RssDaoMixin {
     await rss.refreshRssItems();
     await rssItemDao.saveItems(rss.rssItems);
     return fid;
+  }
+
+  // 将老的cateid 变为 0
+  resetCateId(int oldCateId) async {
+    return (update(rssTable)..where((tbl) => tbl.categoryId.equals(oldCateId)))
+        .write(const RssTableCompanion(categoryId: Value(0)));
+  }
+
+  updateRssListToCate(List<int> rssIds, RssCategory cate) {
+    return (update(rssTable)..where((tbl) => tbl.id.isIn(rssIds)))
+        .write(RssTableCompanion(categoryId: Value(cate.id)));
   }
 
   // 删除 rss,

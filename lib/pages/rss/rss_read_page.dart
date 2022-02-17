@@ -5,6 +5,7 @@ import 'package:flutter_best_practice/pages/rss/views/add_rss_view.dart';
 import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
+import 'package:flutter_best_practice/pages/rss/views/rss_cate_select_view.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -123,7 +124,7 @@ class RssReadPage extends HookConsumerWidget {
           ),
         ),
       ),
-      body: _buildBody(state, cateState, ref),
+      body: _buildBody(state, cateState, ref, context),
     );
   }
 
@@ -234,7 +235,8 @@ class RssReadPage extends HookConsumerWidget {
     );
   }
 
-  Widget _buildBody(RssReadState state, RssCateState cateState, WidgetRef ref) {
+  Widget _buildBody(RssReadState state, RssCateState cateState, WidgetRef ref,
+      BuildContext context) {
     return Column(
       children: [
         Expanded(
@@ -293,7 +295,19 @@ class RssReadPage extends HookConsumerWidget {
                         title: "分组",
                         enable: state.selectItems.isNotEmpty,
                         onTap: () {
-                          ref.read(rssReadProvider.notifier).folder();
+                          /// 弹窗，分类选择
+                          Alert(
+                            context: context,
+                            title: "选择新分类",
+                            content: RssCateSelectView(
+                              onSelect: (cate) {
+                                ref
+                                    .read(rssReadProvider.notifier)
+                                    .folderTo(cate);
+                              },
+                            ),
+                            buttons: [],
+                          ).show();
                         }),
                     _buildEditAction(
                         icon: LineIcons.trash,

@@ -10,6 +10,9 @@ class EmptyView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+          ),
           Container(
             margin: const EdgeInsets.only(top: 100),
             child: const Text("暂无数据"),
@@ -30,11 +33,14 @@ class ErrorView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+          ),
           Container(
             margin: const EdgeInsets.only(top: 100),
             child: const Text("发生未知错误"),
           ),
-          TextButton(onPressed: onReloadTap, child: Text("重新加载")),
+          TextButton(onPressed: onReloadTap, child: const Text("重新加载")),
         ],
       ),
     );

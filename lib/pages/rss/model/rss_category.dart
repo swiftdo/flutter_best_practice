@@ -15,5 +15,9 @@ class RssCategory {
       : id = 0,
         name = "未分类";
 
+  RssCategory copy({String? name, int? id}) {
+    return RssCategory(id: id ?? this.id, name: name ?? this.name);
+  }
+
   RssCategory({required this.id, required this.name});
 }

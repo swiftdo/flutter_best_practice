@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_best_practice/data/db/table/rss_item_table.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 
 import '../rss_db.dart';
@@ -113,6 +114,16 @@ class RssItemDao extends DatabaseAccessor<RssDatabase> with _$RssItemDaoMixin {
   /// 删除某个rss的items
   Future<int> deleteItemsFromRss(int fid) {
     return (delete(rssItemTable)..where((tbl) => tbl.fid.equals(fid))).go();
+  }
+
+  resetCateId(int oldCateId) async {
+    return (update(rssItemTable)..where((tbl) => tbl.cateId.equals(oldCateId)))
+        .write(const RssItemTableCompanion(cateId: Value(0)));
+  }
+
+  updateRssItemToCate(List<int> rssIds, RssCategory cate) async {
+    return (update(rssItemTable)..where((tbl) => tbl.fid.isIn(rssIds)))
+        .write(RssItemTableCompanion(cateId: Value(cate.id)));
   }
 
   /// 更新某个item

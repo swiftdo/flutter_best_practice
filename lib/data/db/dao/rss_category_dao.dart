@@ -21,7 +21,7 @@ class RssCategoryDao extends DatabaseAccessor<RssDatabase>
   }
 
   /// 添加
-  addCate(RssCategory cate) async {
+  Future<int> addCate(RssCategory cate) async {
     return into(rssCategoryTable).insert(
       RssCategoryTableCompanion(
         name: Value(cate.name),

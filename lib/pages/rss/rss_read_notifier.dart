@@ -1,6 +1,7 @@
 import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
+import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
 import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
@@ -63,6 +64,15 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
           RssReadState.initial([]),
         );
 
+  deleteCate(RssCategory cate) async {
+    // 找到这些 cate
+    rssDao.resetCateId(cate.id);
+    rssItemDao.resetCateId(cate.id);
+
+    /// 刷新
+    onRefresh();
+  }
+
   /// 文章已读
   readRssItem(RssItemModel item) async {
     final newItem = item.copy(isRead: true);
@@ -115,14 +125,21 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
   }
 
   // 移动选中的分类
-  folder() {
+  folderTo(RssCategory cate) async {
     /// 需要选择分类，分类选择成功后，才可以
-    /// 如何使用
+    final rssIds = state.selectItems.map((e) => e.id!).toList();
+    await rssDao.updateRssListToCate(rssIds, cate);
+    await rssItemDao.updateRssItemToCate(rssIds, cate);
+    onRefresh();
   }
 
   // 下拉刷新
   onRefresh({RefreshController? refreshController}) async {
-    state = state.copy(viewState: ViewState.busy);
+    state = state.copy(
+      viewState: ViewState.busy,
+      isEditMode: false,
+      selectItems: [],
+    );
     try {
       /// 从缓存中获取
       final res = await rssDao.getAllRssList(rssItemDao: rssItemDao);

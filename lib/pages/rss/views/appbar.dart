@@ -25,7 +25,10 @@ class AppBarExt {
     );
   }
 
-  static AppBar backTitle(String title) {
+  static AppBar backTitle(
+    String title, {
+    List<Widget>? actions,
+  }) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,
@@ -45,6 +48,7 @@ class AppBarExt {
         title,
         style: const TextStyle(color: Colors.black),
       ),
+      actions: actions,
     );
   }
 }
