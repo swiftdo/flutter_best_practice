@@ -10,7 +10,7 @@
 
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
 
-如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的UDID" 即可,
+如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的UDID" 即可（顺便可入Flutter微信群）,
 > 如何获取 UDID, 请点击[跳转这里](https://www.pgyer.com/tools/udid)
 
 ## 规划
