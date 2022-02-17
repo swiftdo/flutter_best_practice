@@ -1,8 +1,15 @@
 # flutter_best_practice
 
+## 运行效果
+
+![](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
+
 ## 下载地址
 
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
+
+如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的UDID" 即可,
+> 如何获取 UDID, 请点击[跳转这里](https://www.pgyer.com/tools/udid)
 
 ## 规划
 
@@ -18,6 +25,8 @@
 * [ ] 应用评价
 
 ## 代码生成
+
+请用 2.8.0 以上的 flutter 版本，建议使用 [FVM 管理 flutter 环境](https://oldbird.run/flutter/t7-fvm.html)
 
 ```shell
 fvm flutter pub run build_runner build --delete-conflicting-outputs
@@ -54,7 +63,7 @@ RSS 可能是抵御算法推荐的最后一方净土
 
 关于单元测试的更多内容，可移步至 [单元测试](https://flutter.cn/docs/cookbook/testing/unit/introduction) 的文档。
 
-### 参考：
+## 参考：
 
 * [如何使用RSS](https://www.ruanyifeng.com/blog/2006/01/rss.html)
 * [RSS 教程](https://www.runoob.com/rss/rss-tutorial.html)
