@@ -65,6 +65,10 @@ RSS 可能是抵御算法推荐的最后一方净土
 
 关于单元测试的更多内容，可移步至 [单元测试](https://flutter.cn/docs/cookbook/testing/unit/introduction) 的文档。
 
+## 自动打包
+
+* 支持持续集成，具体步骤可参考：[Github Actions 免费构建 Flutter iOS 包](https://oldbird.run/flutter/github-actions-build-flutter-ios.html)
+
 ## 参考：
 
 * [如何使用RSS](https://www.ruanyifeng.com/blog/2006/01/rss.html)
