@@ -36,7 +36,9 @@ class RssArticlesNotifier extends StateNotifier<RssArticlesState> {
     final newItem = item.copy(isRead: true);
     final rss = state.rss;
     int itemIndex = rss.rssItems.indexWhere((element) => element.id == item.id);
-    rss.rssItems[itemIndex] = newItem;
+    if (itemIndex >= 0) {
+      rss.rssItems[itemIndex] = newItem;
+    }
     state = state.copy(rss: rss);
   }
 

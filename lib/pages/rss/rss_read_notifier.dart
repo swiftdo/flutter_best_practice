@@ -81,7 +81,9 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
     int rssIndex = items.indexWhere((element) => element.id == item.fid);
     final rss = items[rssIndex];
     int itemIndex = rss.rssItems.indexWhere((element) => element.id == item.id);
-    rss.rssItems[itemIndex] = newItem;
+    if (itemIndex >= 0) {
+      rss.rssItems[itemIndex] = newItem;
+    }
     state = state.copy(items: items);
   }
 

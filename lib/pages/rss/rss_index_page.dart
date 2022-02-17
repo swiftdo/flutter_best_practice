@@ -5,6 +5,7 @@ import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
 import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
 import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
 import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
+import 'package:flutter_best_practice/pages/rss/views/rss_article_cell.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -52,115 +53,11 @@ class RssIndexPage extends HookConsumerWidget {
           bottom: max(MediaQuery.of(context).padding.bottom, 10)),
       itemBuilder: (context, index) {
         final rssItem = allItems[index];
-        return GestureDetector(
+        return RssArticleCell(
+          rssItem: rssItem,
           onTap: () {
             ref.read(rssReadProvider.notifier).readRssItem(rssItem);
-            ref.read(gRouteProvider).push(
-                  RssArticleRoute(
-                    rssItem: rssItem,
-                  ),
-                );
           },
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 10,
-                    offset: Offset.zero,
-                  ),
-                ]),
-            child: Column(
-              children: [
-                if (rssItem.cover != null && rssItem.cover!.isNotEmpty)
-                  CacheImage(
-                    width: double.infinity,
-                    height: 160,
-                    imageUrl: rssItem.cover!,
-                    fit: BoxFit.cover,
-                  ),
-                Container(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          rssItem.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: rssItem.isRead ? Colors.grey : Colors.black,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          rssItem.showDesc,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CacheImage(
-                                  margin: const EdgeInsets.only(right: 5),
-                                  borderRadius: BorderRadius.circular(20),
-                                  imageUrl: rssItem.rssLogo,
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.cover,
-                                ),
-                                Text(
-                                  rssItem.rssName,
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      LineIcons.calendar,
-                                      size: 16,
-                                    ),
-                                    Text(
-                                      rssItem.showDate,
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
         );
       },
       itemCount: allItems.length,
