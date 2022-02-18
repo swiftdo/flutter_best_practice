@@ -4,17 +4,21 @@
 
 ![](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
 
-图片如果没有显示出来，请点击这里: [http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
+👆🏻 图片如果没有加载出来，请点击: [http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
 
 ## 下载地址
 
 1、iOS:
+
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
 
-如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的UDID" 即可（顺便可入Flutter微信群）,
+如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的 UDID" 即可（顺便可入 Flutter 微信群）,
+
 > 如何获取 UDID, 请点击[跳转这里](https://www.pgyer.com/tools/udid)
 
+
 2、Android:
+
 蒲公英下载地址：[https://www.pgyer.com/QdNY](蒲公英下载地址)
 
 ![android](https://www.pgyer.com/app/qrcode/QdNY)
@@ -56,6 +60,15 @@ RSS 更高效地获取信息，不在多个应用间来回切换，另一方面�
 
 RSS 可能是抵御算法推荐的最后一方净土
 
+
+## 自动打包
+
+支持持续集成，具体步骤可参考：
+
+* [Github Actions 免费构建 Flutter iOS 包](https://oldbird.run/flutter/github-actions-build-flutter-ios.html)
+* [Github Actions 免费构建 Flutter Android 包](https://oldbird.run/flutter/github-actions-build-flutter-android.html)
+
+
 ## 单元测试
 
 1、将 test 或者 flutter_test 加入依赖；
@@ -71,10 +84,6 @@ RSS 可能是抵御算法推荐的最后一方净土
 6、执行测试。
 
 关于单元测试的更多内容，可移步至 [单元测试](https://flutter.cn/docs/cookbook/testing/unit/introduction) 的文档。
-
-## 自动打包
-
-* 支持持续集成，具体步骤可参考：[Github Actions 免费构建 Flutter iOS 包](https://oldbird.run/flutter/github-actions-build-flutter-ios.html)
 
 ## 参考：
 
