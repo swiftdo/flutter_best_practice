@@ -8,10 +8,16 @@
 
 ## 下载地址
 
+1、iOS:
 蒲公英下载地址：[https://www.pgyer.com/eLAq](https://www.pgyer.com/eLAq)
 
 如果你不想运行代码，想体验线真机，请把你的 UDID 发给我，关注 **OldBirds公众号**，回复 "Rss+你的UDID" 即可（顺便可入Flutter微信群）,
 > 如何获取 UDID, 请点击[跳转这里](https://www.pgyer.com/tools/udid)
+
+2、Android:
+蒲公英下载地址：[https://www.pgyer.com/QdNY](蒲公英下载地址)
+
+![android](https://www.pgyer.com/app/qrcode/QdNY)
 
 ## 规划
 
@@ -20,6 +26,7 @@
 * [x] rss 删除
 * [x] rss 文章详情
 * [x] rss 分类管理
+* [x] 持续集成，iOS 和 android 自动打包
 * [ ] 收藏
 * [ ] 历史
 * [ ] OPML 导入和导出
