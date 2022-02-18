@@ -31,7 +31,7 @@ jobs:
         run: |
           # import keystore from secrets
           ls -all
-          echo $KEYSTORE_BASE64 | base64 -di > android/app/key/key.jks
+          echo $KEYSTORE_BASE64 | base64 -di > android/app/key.jks
           echo $KEY_PROPERTIES | base64 -di > android/key.properties
 
       - name: Restore packages
