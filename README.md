@@ -19,7 +19,7 @@
 
 2、Android:
 
-蒲公英下载地址：[https://www.pgyer.com/QdNY](蒲公英下载地址)
+蒲公英下载地址：[https://www.pgyer.com/QdNY](https://www.pgyer.com/QdNY)
 
 ![android](https://www.pgyer.com/app/qrcode/QdNY)
 
