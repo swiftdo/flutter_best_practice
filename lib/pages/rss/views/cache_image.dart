@@ -32,15 +32,22 @@ class CacheImage extends StatelessWidget {
         height: height,
         fit: fit,
         imageUrl: imageUrl,
-        placeholder: (context, url) => const CircularProgressIndicator(),
+        placeholder: (context, url) => Container(
+          alignment: Alignment.center,
+          color: Colors.grey[100],
+          child: const CircularProgressIndicator(
+            color: Colors.black54,
+          ),
+        ),
         errorWidget: (context, url, error) => Container(
+          alignment: Alignment.center,
           child: Icon(
             Icons.error,
             color: Colors.black38.withOpacity(0.1),
             size: width != null ? max(16, width! * 0.1) : 20,
           ),
           decoration: BoxDecoration(
-            color: Colors.black12,
+            color: Colors.grey[100],
             borderRadius: borderRadius,
           ),
         ),
