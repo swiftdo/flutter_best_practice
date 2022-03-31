@@ -252,14 +252,14 @@ packages:
       name: drift
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   drift_dev:
     dependency: "direct dev"
     description:
       name: drift_dev
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.2"
   fake_async:
     dependency: transitive
     description:
@@ -879,14 +879,14 @@ packages:
       name: sqlite3_flutter_libs
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.5.3"
+    version: "0.5.4"
   sqlparser:
     dependency: transitive
     description:
       name: sqlparser
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.20.0"
+    version: "0.21.0"
   stack_trace:
     dependency: transitive
     description:

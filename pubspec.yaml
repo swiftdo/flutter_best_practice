@@ -1,7 +1,7 @@
 name: flutter_best_practice
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.0+5
+version: 1.0.0+8
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -17,9 +17,9 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # sqlite 存储
-  drift: ^1.1.0
-  sqlite3_flutter_libs: ^0.5.0
-  path_provider: ^2.0.0
+  drift: ^1.5.0
+  sqlite3_flutter_libs: ^0.5.4
+  path_provider: ^2.0.9
   path: ^1.8.0
 
   # 状态管理
@@ -63,7 +63,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  drift_dev: ^1.1.0
+  drift_dev: ^1.5.2
   build_runner: ^2.1.5
   freezed:
   auto_route_generator:
