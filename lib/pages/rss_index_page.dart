@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/data/model/view_state.dart';
 import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
 import 'views/appbar.dart';
 import 'views/cache_image.dart';
@@ -11,8 +12,6 @@ import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import 'model/view_state.dart';
 
 // rss 首页
 class RssIndexPage extends HookConsumerWidget {

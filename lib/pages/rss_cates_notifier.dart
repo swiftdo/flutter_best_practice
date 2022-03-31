@@ -3,7 +3,7 @@ import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'model/rss_category.dart';
+import '../data/model/rss_category.dart';
 
 class RssCateState {
   final List<RssCategory> items;

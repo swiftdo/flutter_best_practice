@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'model/rss_item_model.dart';
+import '../data/model/rss_item_model.dart';
 import 'views/appbar.dart';
 import 'views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
@@ -35,7 +35,7 @@ class RssArticlePage extends HookConsumerWidget {
           onImageTap: (String? url, RenderContext context,
               Map<String, String> attributes, element) {
             if (url != null) {
-              ref.read(gRouteProvider).push(RssPhotoViewRoute(url: url));
+              myRouter.push(RssPhotoViewRoute(url: url));
             }
           },
           onLinkTap: (String? url, RenderContext context,

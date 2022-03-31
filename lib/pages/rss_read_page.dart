@@ -15,8 +15,8 @@ import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'model/rss.dart';
-import 'model/view_state.dart';
+import '../data/model/rss.dart';
+import 'package:flutter_best_practice/data/model/view_state.dart';
 
 /// 源头
 class RssReadPage extends HookConsumerWidget {
@@ -170,9 +170,7 @@ class RssReadPage extends HookConsumerWidget {
                             Navigator.of(context).pop();
 
                             /// 跳转到
-                            ref
-                                .read(gRouteProvider)
-                                .push(const RssCatesRoute());
+                            myRouter.push(const RssCatesRoute());
                           },
                           icon: const Icon(
                             Icons.settings,
@@ -384,7 +382,7 @@ class RssReadPage extends HookConsumerWidget {
   Widget _buildItemCell(RssReadState state, Rss rss, WidgetRef ref) {
     final cell = GestureDetector(
       onTap: () {
-        ref.read(gRouteProvider).push(RssArticlesRoute(rss: rss));
+        myRouter.push(RssArticlesRoute(rss: rss));
       },
       child: Container(
         decoration: BoxDecoration(

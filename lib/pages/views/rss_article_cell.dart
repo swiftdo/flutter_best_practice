@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/model/rss_item_model.dart';
+import 'package:flutter_best_practice/data/model/rss_item_model.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_html/shims/dart_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,11 +22,11 @@ class RssArticleCell extends HookConsumerWidget {
     return GestureDetector(
       onTap: () {
         onTap?.call();
-        ref.read(gRouteProvider).push(
-              RssArticleRoute(
-                rssItem: rssItem,
-              ),
-            );
+        myRouter.push(
+          RssArticleRoute(
+            rssItem: rssItem,
+          ),
+        );
       },
       child: Container(
         clipBehavior: Clip.antiAlias,

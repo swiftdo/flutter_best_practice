@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_best_practice/data/model/view_state.dart';
 import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
 import 'views/appbar.dart';
 import 'views/cache_image.dart';
@@ -10,8 +11,6 @@ import 'views/page_common_views.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:group_list_view/group_list_view.dart';
-
-import 'model/view_state.dart';
 
 class RssFindPage extends HookConsumerWidget {
   final RefreshController _refreshController =
@@ -82,9 +81,7 @@ class RssFindPage extends HookConsumerWidget {
                         .indexWhere((element) => element.feedUrl == item.url);
                     // 如果存在则跳转到 rss 文章列表
                     if (index >= 0) {
-                      ref
-                          .read(gRouteProvider)
-                          .push(RssArticlesRoute(rss: rssList[index]));
+                      myRouter.push(RssArticlesRoute(rss: rssList[index]));
                     } else {
                       // 跳转不一样的
                     }

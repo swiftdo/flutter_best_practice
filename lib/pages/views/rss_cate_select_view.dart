@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/model/rss_category.dart';
+import 'package:flutter_best_practice/data/model/rss_category.dart';
 import 'package:flutter_best_practice/pages/rss_cates_notifier.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
@@ -38,7 +38,7 @@ class RssCateSelectView extends HookConsumerWidget {
             height: 40,
             child: ElevatedButton(
               onPressed: () {
-                ref.read(gRouteProvider).push(const RssCatesRoute());
+                myRouter.push(const RssCatesRoute());
               },
               child: const Text("分类管理"),
             ),

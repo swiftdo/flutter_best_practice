@@ -1,7 +1,7 @@
 import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/data/model/rss_sources_model.dart';
+import 'package:flutter_best_practice/data/model/view_state.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
-import 'model/view_state.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -60,8 +60,8 @@ class RssFindNotifier extends StateNotifier<RssFindState> {
     } catch (e, s) {
       refreshController?.refreshCompleted();
       state = state.copy(items: [], viewState: ViewState.error);
-      MyToast.showError("加载失败");
-      logger.e(error: e, stackTrace: s);
+      myToast.showError("加载失败");
+      myLogger.e(error: e, stackTrace: s);
     }
   }
 }

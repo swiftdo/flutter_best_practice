@@ -1,15 +1,15 @@
 import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
-import 'model/rss_category.dart';
-import 'model/rss_item_model.dart';
+import '../data/model/rss_category.dart';
+import '../data/model/rss_item_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../provider.dart';
-import 'model/rss.dart';
-import 'model/view_state.dart';
+import '../data/model/rss.dart';
+import 'package:flutter_best_practice/data/model/view_state.dart';
 
 class RssReadState {
   final List<Rss> items;
@@ -123,7 +123,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
     items.removeWhere((element) => ids.contains(element.id));
     await rssDao.deleteRssList(state.selectItems, rssItemDao);
     state = state.copy(items: items, selectItems: [], isEditMode: false);
-    MyToast.showSuccess("删除成功");
+    myToast.showSuccess("删除成功");
   }
 
   // 移动选中的分类
@@ -159,7 +159,7 @@ class RssReadNotifier extends StateNotifier<RssReadState> {
       }
     } catch (e, s) {
       refreshController?.refreshCompleted();
-      logger.e(error: e, stackTrace: s);
+      myLogger.e(error: e, stackTrace: s);
       state = state.copy(viewState: ViewState.error);
     }
   }

@@ -34,7 +34,7 @@ class RssConfigNotifier extends StateNotifier<RssConfigState> {
               icon: Icons.folder,
               title: "分类管理",
               onTap: (ref) {
-                ref.read(gRouteProvider).push(const RssCatesRoute());
+                myRouter.push(const RssCatesRoute());
               },
             ),
             ConfigRow(icon: Icons.favorite, title: "我的收藏"),

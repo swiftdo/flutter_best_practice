@@ -36,7 +36,7 @@ class AppBarExt {
       leading: HookConsumer(builder: (context, ref, child) {
         return IconButton(
           onPressed: () {
-            ref.read(gRouteProvider).pop();
+            myRouter.pop();
           },
           icon: const Icon(
             LineIcons.angleLeft,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'model/rss_category.dart';
+import '../data/model/rss_category.dart';
 import 'views/appbar.dart';
 import 'views/page_common_views.dart';
 import 'views/rss_cate_add_view.dart';

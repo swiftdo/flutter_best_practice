@@ -26,7 +26,7 @@ class RssPhotoViewPage extends HookConsumerWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                ref.read(gRouteProvider).pop();
+                myRouter.pop();
               },
             ),
           )

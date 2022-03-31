@@ -14,7 +14,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'model/rss.dart';
+import '../data/model/rss.dart';
 
 /// 文章列表
 class RssArticlesPage extends HookConsumerWidget {

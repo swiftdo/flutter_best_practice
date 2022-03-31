@@ -13,8 +13,8 @@
 import 'package:auto_route/auto_route.dart' as _i10;
 import 'package:flutter/material.dart' as _i11;
 
-import '../pages/model/rss.dart' as _i12;
-import '../pages/model/rss_item_model.dart' as _i13;
+import '../data/model/rss.dart' as _i12;
+import '../data/model/rss_item_model.dart' as _i13;
 import '../pages/rss_article_page.dart' as _i4;
 import '../pages/rss_articles_page.dart' as _i3;
 import '../pages/rss_cates_page.dart' as _i2;

@@ -2,9 +2,9 @@ import 'package:drift/drift.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/db/rss_db.dart';
 import 'package:flutter_best_practice/data/db/table/rss_table.dart';
-import 'package:flutter_best_practice/pages/model/rss.dart';
-import 'package:flutter_best_practice/pages/model/rss_category.dart';
-import 'package:flutter_best_practice/pages/model/rss_item_model.dart';
+import 'package:flutter_best_practice/data/model/rss.dart';
+import 'package:flutter_best_practice/data/model/rss_category.dart';
+import 'package:flutter_best_practice/data/model/rss_item_model.dart';
 
 part 'rss_dao.g.dart';
 

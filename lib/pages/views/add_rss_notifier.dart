@@ -6,8 +6,8 @@ import 'package:flutter_best_practice/data/repository/rss_repository.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../model/rss.dart';
-import '../model/rss_category.dart';
+import '../../data/model/rss.dart';
+import '../../data/model/rss_category.dart';
 
 enum AddRssStatus { ideal, loading, finished, error }
 
@@ -65,7 +65,7 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
   fetch() async {
     final String? url = state.url?.trim();
     if (url == null || url.isEmpty) {
-      MyToast.showError("请填写 url");
+      myToast.showError("请填写 url");
       return;
     }
     state = state.copyWithStatus(AddRssStatus.loading);
@@ -78,8 +78,8 @@ class AddRssNotifier extends StateNotifier<AddRssState> {
           state.copyWith(url: state.url!, status: AddRssStatus.error, rss: rss);
     } catch (e, s) {
       state = state.copyWithStatus(AddRssStatus.ideal);
-      logger.e(error: e, stackTrace: s);
-      MyToast.showError("获取失败");
+      myLogger.e(error: e, stackTrace: s);
+      myToast.showError("获取失败");
     }
   }
 
