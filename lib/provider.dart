@@ -11,6 +11,8 @@ import 'data/repository/rss_repository.dart';
 
 /// 全局的provider
 final myRouter = AppRouter();
+final myLogger = MyLog();
+final myToast = MyToast();
 
 /// 数据库
 final gDb = Provider((ref) {
@@ -35,6 +37,3 @@ final rssCateDaoProvider = Provider((ref) {
 final repositoryProvider = Provider.autoDispose<IRssRepository>((ref) {
   return RssRepository();
 });
-
-final myLogger = MyLog();
-final myToast = MyToast();

@@ -40,7 +40,7 @@ dependencies:
 
   # rss
   webfeed: ^0.7.0
-  bottom_navy_bar: ^6.0.0
+  google_nav_bar: ^5.0.6
 
   rflutter_alert: ^2.0.4
   progress_state_button: ^1.0.4
