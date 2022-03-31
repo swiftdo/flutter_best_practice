@@ -1,7 +1,7 @@
 name: flutter_best_practice
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.0+5
 
 environment:
   sdk: ">=2.15.0 <3.0.0"
@@ -23,7 +23,7 @@ dependencies:
   path: ^1.8.0
 
   # 状态管理
-  flutter_hooks: ^0.18.0
+  flutter_hooks: ^0.18.2+1
   hooks_riverpod: ^1.0.3
   # 数据
   freezed_annotation:
