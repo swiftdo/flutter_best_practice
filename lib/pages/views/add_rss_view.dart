@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/core/toast_util.dart';
-import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
-import 'package:flutter_best_practice/pages/rss/views/rss_cate_select_view.dart';
+import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/views/rss_cate_select_view.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:progress_state_button/progress_button.dart';

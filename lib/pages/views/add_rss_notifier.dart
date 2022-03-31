@@ -2,10 +2,12 @@ import 'package:flutter_best_practice/core/toast_util.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
+
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../model/rss.dart';
+import '../model/rss_category.dart';
 
 enum AddRssStatus { ideal, loading, finished, error }
 

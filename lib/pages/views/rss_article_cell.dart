@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'package:flutter_best_practice/pages/model/rss_item_model.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_html/shims/dart_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,11 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
-import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
-import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
-import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
-import 'package:flutter_best_practice/pages/rss/views/rss_article_cell.dart';
+import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
+import 'views/appbar.dart';
+import 'views/cache_image.dart';
+import 'views/page_common_views.dart';
+import 'views/rss_article_cell.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
-import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
-import 'package:flutter_best_practice/pages/rss/views/cache_image.dart';
+import 'model/rss_item_model.dart';
+import 'views/appbar.dart';
+import 'views/cache_image.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:flutter_html/flutter_html.dart';

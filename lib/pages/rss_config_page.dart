@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/rss_config_notifier.dart';
-import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
+import 'package:flutter_best_practice/pages/rss_config_notifier.dart';
+import 'views/appbar.dart';
 import 'package:group_list_view/group_list_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

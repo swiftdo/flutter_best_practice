@@ -1,11 +1,11 @@
 import 'package:flutter_best_practice/data/db/dao/rss_dao.dart';
 import 'package:flutter_best_practice/data/db/dao/rss_item_dao.dart';
 import 'package:flutter_best_practice/data/repository/rss_repository.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'model/rss_item_model.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../provider.dart';
+import '../provider.dart';
 import 'model/rss.dart';
 
 class RssArticlesState {

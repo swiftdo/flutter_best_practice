@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_best_practice/data/model/rss_source_model.dart';
-import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
-import 'package:flutter_best_practice/pages/rss/views/appbar.dart';
-import 'package:flutter_best_practice/pages/rss/views/page_common_views.dart';
-import 'package:flutter_best_practice/pages/rss/views/rss_cate_add_view.dart';
-import 'package:flutter_best_practice/pages/rss/views/rss_cate_delete_view.dart';
+import 'model/rss_category.dart';
+import 'views/appbar.dart';
+import 'views/page_common_views.dart';
+import 'views/rss_cate_add_view.dart';
+import 'views/rss_cate_delete_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'rss_cates_notifier.dart';

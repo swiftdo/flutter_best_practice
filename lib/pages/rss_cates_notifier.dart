@@ -1,5 +1,5 @@
 import 'package:flutter_best_practice/data/db/dao/rss_category_dao.dart';
-import 'package:flutter_best_practice/pages/rss/rss_read_notifier.dart';
+import 'package:flutter_best_practice/pages/rss_read_notifier.dart';
 import 'package:flutter_best_practice/provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

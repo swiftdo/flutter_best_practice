@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:favicon/favicon.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'package:flutter_best_practice/pages/model/rss.dart';
 import 'package:webfeed/domain/atom_feed.dart';
 import 'package:webfeed/domain/rss_feed.dart';
 

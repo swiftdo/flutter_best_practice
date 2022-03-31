@@ -1,4 +1,4 @@
-import 'package:flutter_best_practice/pages/rss/model/rss_item_model.dart';
+import 'rss_item_model.dart';
 import 'package:webfeed/domain/atom_item.dart';
 import 'package:webfeed/domain/rss_item.dart';
 

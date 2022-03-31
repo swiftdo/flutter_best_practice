@@ -1,7 +1,7 @@
 import 'package:flutter_best_practice/core/date_util.dart';
 import 'package:flutter_best_practice/core/string_util.dart';
 import 'package:flutter_best_practice/core/timeline_util.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss.dart';
+import 'rss.dart';
 import 'package:webfeed/domain/atom_item.dart';
 import 'package:webfeed/domain/rss_item.dart';
 
