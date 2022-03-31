@@ -40,10 +40,10 @@ class RssConfigNotifier extends StateNotifier<RssConfigState> {
             ConfigRow(icon: Icons.favorite, title: "我的收藏"),
             ConfigRow(icon: Icons.history, title: "浏览历史"),
           ]),
-          ConfigSection(name: "支持我们", rows: [
-            ConfigRow(icon: Icons.comment, title: "评价我们"),
-            ConfigRow(icon: Icons.share, title: "分享给朋友"),
-          ]),
+          // ConfigSection(name: "支持我们", rows: [
+          //   ConfigRow(icon: Icons.comment, title: "评价我们"),
+          //   ConfigRow(icon: Icons.share, title: "分享给朋友"),
+          // ]),
         ]));
 }
 

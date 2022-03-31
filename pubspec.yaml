@@ -68,10 +68,17 @@ dev_dependencies:
   freezed:
   auto_route_generator:
   json_serializable:
-
-flutter:
-  uses-material-design: true
+  flutter_gen_runner:
 
 # 国际化
 flutter_intl:
   enabled: true
+
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 80 # Optional (default: 80)
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/

@@ -22,6 +22,7 @@ class RssConfigPage extends HookConsumerWidget {
       itemBuilder: (context, IndexPath index) {
         final item = state.sections[index.section].rows[index.index];
         return GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => item.onTap?.call(ref),
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -29,11 +30,16 @@ class RssConfigPage extends HookConsumerWidget {
               children: [
                 Icon(
                   item.icon,
-                  size: 18,
+                  size: 20,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 3),
-                  child: Text(item.title),
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text(
+                    item.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ],
             ),
