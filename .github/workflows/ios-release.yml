@@ -58,7 +58,9 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter
-        run: flutter build ios --release --no-codesign
+        run: |
+          pod repo update
+          flutter build ios --release --no-codesign
 
       - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace ios/Runner.xcworkspace -scheme ${{ env.SHEME }} -configuration ${{ env.BUILD_CONFIGURATION }}
