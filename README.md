@@ -41,6 +41,7 @@
 
 freezed + json_serializable 大法好，参考文章[How to Parse JSON in Dart/Flutter with Code Generation using Freezed](https://codewithandrea.com/articles/parse-json-dart-codegen-freezed/)
 
+json > dart freezed 代码生成网站：[https://app.quicktype.io](https://app.quicktype.io/)
 
 ## 代码生成
 
