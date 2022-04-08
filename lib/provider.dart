@@ -4,14 +4,15 @@ import 'package:flutter_best_practice/router/route.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/log_util.dart';
+import 'core/toast_util.dart';
 import 'data/db/dao/rss_dao.dart';
 import 'data/db/dao/rss_item_dao.dart';
 import 'data/repository/rss_repository.dart';
 
 /// 全局的provider
-final gRouteProvider = Provider((ref) {
-  return AppRouter();
-});
+final myRouter = AppRouter();
+final myLogger = MyLog();
+final myToast = MyToast();
 
 /// 数据库
 final gDb = Provider((ref) {
@@ -36,5 +37,3 @@ final rssCateDaoProvider = Provider((ref) {
 final repositoryProvider = Provider.autoDispose<IRssRepository>((ref) {
   return RssRepository();
 });
-
-var logger = MyLog();

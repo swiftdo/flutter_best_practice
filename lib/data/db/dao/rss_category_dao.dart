@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:flutter_best_practice/data/db/table/rss_category_table.dart';
-import 'package:flutter_best_practice/pages/rss/model/rss_category.dart';
+import 'package:flutter_best_practice/data/model/rss_category.dart';
 
 import '../rss_db.dart';
 

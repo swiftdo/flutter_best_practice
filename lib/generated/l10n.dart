@@ -50,11 +50,41 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `hello`
-  String get hell {
+  /// `首页`
+  String get tab_home {
     return Intl.message(
-      'hello',
-      name: 'hell',
+      '首页',
+      name: 'tab_home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `订阅`
+  String get tab_order {
+    return Intl.message(
+      '订阅',
+      name: 'tab_order',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `发现`
+  String get tab_find {
+    return Intl.message(
+      '发现',
+      name: 'tab_find',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `我的`
+  String get tab_mine {
+    return Intl.message(
+      '我的',
+      name: 'tab_mine',
       desc: '',
       args: [],
     );

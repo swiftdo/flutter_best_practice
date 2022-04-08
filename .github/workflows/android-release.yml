@@ -22,7 +22,7 @@ jobs:
       - name: Install and set Flutter version
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.0'
+          flutter-version: '2.10.3'
 
       - name: Create the Keystore
         env:

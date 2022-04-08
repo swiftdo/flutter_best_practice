@@ -11,22 +11,21 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends HookConsumerWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final appRouter = ref.watch(gRouteProvider);
+  Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      routeInformationParser: appRouter.defaultRouteParser(),
-      routeInformationProvider: appRouter.routeInfoProvider(),
+      routeInformationParser: myRouter.defaultRouteParser(),
+      routeInformationProvider: myRouter.routeInfoProvider(),
       routerDelegate: AutoRouterDelegate(
-        appRouter,
+        myRouter,
         navigatorObservers: () => [AppRouteObserver()],
       ),
-      builder: MyToast.init(),
+      builder: myToast.init(),
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

@@ -3,13 +3,13 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class MyToast {
   /// init EasyLoading
-  static TransitionBuilder init({
+  TransitionBuilder init({
     TransitionBuilder? builder,
   }) {
     return EasyLoading.init();
   }
 
-  static Future<void> showSuccess(
+  Future<void> showSuccess(
     String status, {
     Duration? duration,
     EasyLoadingMaskType? maskType,
@@ -23,7 +23,7 @@ class MyToast {
     );
   }
 
-  static Future<void> showError(
+  Future<void> showError(
     String status, {
     Duration? duration,
     EasyLoadingMaskType? maskType,
@@ -37,7 +37,7 @@ class MyToast {
     );
   }
 
-  static Future<void> showInfo(
+  Future<void> showInfo(
     String status, {
     Duration? duration,
     EasyLoadingMaskType? maskType,
