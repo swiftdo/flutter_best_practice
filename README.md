@@ -37,6 +37,11 @@
 * [ ] 应用分享
 * [ ] 应用评价
 
+## 数据解析 
+
+freezed + json_serializable 大法好，参考文章[How to Parse JSON in Dart/Flutter with Code Generation using Freezed](https://codewithandrea.com/articles/parse-json-dart-codegen-freezed/)
+
+
 ## 代码生成
 
 请用 2.8.0 以上的 flutter 版本，建议使用 [FVM 管理 flutter 环境](https://oldbird.run/flutter/t7-fvm.html)
