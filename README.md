@@ -2,9 +2,9 @@
 
 ## 运行效果
 
-![](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
+![](http://blog.oldbird.run/mweb/tutieshi_592x1280_49s.gif)
 
-👆🏻 图片如果没有加载出来，请点击: [http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif](http://blog.loveli.site/mweb/tutieshi_592x1280_49s.gif)
+👆🏻 图片如果没有加载出来，请点击: [http://blog.oldbird.run/mweb/tutieshi_592x1280_49s.gif](http://blog.oldbird.run/mweb/tutieshi_592x1280_49s.gif)
 
 ## 下载地址
 
@@ -33,6 +33,9 @@
 * [x] 持续集成，iOS 和 android 自动打包
 * [ ] 收藏
 * [ ] 历史
+* [ ] OPML 导入和导出
+* [ ] 应用分享
+* [ ] 应用评价
 
 ## 数据解析 
 
